@@ -1,4 +1,5 @@
 import 'package:crypto_coin/helpers/constans.dart';
+import 'package:crypto_coin/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/home_page.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: 'Cairo',
       ),
-      home: const HomePage(),
+      home: const BottomNavBar(),
     );
   }
 }

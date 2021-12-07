@@ -1,4 +1,5 @@
 import 'package:crypto_coin/helpers/constans.dart';
+import 'package:crypto_coin/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:iconsax/iconsax.dart';
@@ -11,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  ProfileType selectedProfile = ProfileType.Main_Portfolio;
+  CategoryType selectedCategory = CategoryType.Main_Portfolio;
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +47,16 @@ class _HomePageState extends State<HomePage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               itemSelction(
-                                ProfileType.Main_Portfolio,
-                                selectedProfile == ProfileType.Main_Portfolio,
+                                CategoryType.Main_Portfolio,
+                                selectedCategory == CategoryType.Main_Portfolio,
                               ),
                               itemSelction(
-                                ProfileType.Top_10_coins,
-                                selectedProfile == ProfileType.Top_10_coins,
+                                CategoryType.Top_10_coins,
+                                selectedCategory == CategoryType.Top_10_coins,
                               ),
                               itemSelction(
-                                ProfileType.Experimental,
-                                selectedProfile == ProfileType.Experimental,
+                                CategoryType.Experimental,
+                                selectedCategory == CategoryType.Experimental,
                               )
                             ],
                           ),
@@ -144,14 +145,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget itemSelction(ProfileType profileType, bool isSelected) {
+  Widget itemSelction(CategoryType categoryType, bool isSelected) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
         splashColor: Colors.white24,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         onTap: () => setState(() {
-          selectedProfile = profileType;
+          selectedCategory = categoryType;
         }),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 15),
@@ -160,7 +161,7 @@ class _HomePageState extends State<HomePage> {
             borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
           child: Text(
-            profileType.toShortString(),
+            categoryType.toShortString(),
             style: TextStyle(
               color: isSelected ? Colors.white : const Color(0xFFcfcfce),
               fontSize: 15,

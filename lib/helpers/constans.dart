@@ -8,13 +8,13 @@ const Color blueColor = Color(0xFF0567F6);
 const Color profitGreen = Color(0xFF50C88B);
 const Color lossRed = Color(0xFFFE6366);
 
- enum ProfileType {
+ enum CategoryType {
   Main_Portfolio,
   Experimental,
   Top_10_coins,
 }
 
-extension ParseToStringMediType on ProfileType {
+extension ParseToStringMediType on CategoryType {
   String toShortString() {
     return toString().split('.').last.replaceAll('_', ' ');
   }
