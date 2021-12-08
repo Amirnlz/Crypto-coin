@@ -1,8 +1,7 @@
 import 'package:crypto_coin/helpers/constans.dart';
-import 'package:crypto_coin/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:ionicons/ionicons.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -89,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                                   backgroundColor:
                                       Colors.white.withOpacity(0.15),
                                   child: Icon(
-                                    Iconsax.activity,
+                                    Ionicons.analytics,
                                     size: 27,
                                     color: Colors.white.withOpacity(0.8),
                                   ),
@@ -118,6 +117,8 @@ class _HomePageState extends State<HomePage> {
                   delay: const Duration(milliseconds: 300),
                   duration: const Duration(seconds: 1),
                   child: Container(
+                    height: size.height,
+                    width: size.width,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -127,11 +128,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: SingleChildScrollView(
                       child: Column(
-                        children: [
-                          SizedBox(
-                            height: size.height * 1,
-                            width: size.width,
-                          ),
+                        children: const [
+                          Text('test'),
                         ],
                       ),
                     ),

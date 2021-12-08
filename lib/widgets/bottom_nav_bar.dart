@@ -1,10 +1,11 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:crypto_coin/helpers/constans.dart';
 import 'package:crypto_coin/pages/home_page.dart';
 import 'package:crypto_coin/pages/exchange_page.dart';
-import 'package:crypto_coin/pages/trade_page.dart';
+import 'package:crypto_coin/pages/coin_list_page.dart';
 import 'package:crypto_coin/pages/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:ionicons/ionicons.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -51,7 +52,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           },
           children: const <Widget>[
             HomePage(),
-            TradePage(),
+            CoinListPage(),
             ExchangePage(),
             ProfilePage(),
           ],
@@ -64,25 +65,25 @@ class _BottomNavBarState extends State<BottomNavBar> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(
-                Iconsax.home,
+                Ionicons.home_sharp,
               ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Iconsax.trade,
+                Ionicons.list,
               ),
-              label: 'Trade',
+              label: 'Coins',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Iconsax.wallet,
+                Ionicons.swap_horizontal,
               ),
               label: 'Exchange',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Iconsax.user,
+                Ionicons.person,
               ),
               label: 'Profile',
             ),

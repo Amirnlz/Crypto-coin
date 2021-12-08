@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TradePage extends StatelessWidget {
-  const TradePage({Key? key}) : super(key: key);
+class CoinListPage extends StatelessWidget {
+  const CoinListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class TradePage extends StatelessWidget {
       child: Scaffold(
         body: Center(
           child: Text(
-            'Trade Page',
+            'Coin list Page',
           ),
         ),
       ),
