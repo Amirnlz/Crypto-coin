@@ -35,7 +35,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   animate_do: ^2.0.0
   dio: ^4.0.4
-  ionicons: ^0.1.2
+  iconsax: ^0.0.8
+  loading_indicator: ^3.0.2
+  device_preview: ^1.0.0
+  sizer: ^2.0.15
 
 dev_dependencies:
   flutter_test:
