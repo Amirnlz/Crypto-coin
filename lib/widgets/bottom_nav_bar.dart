@@ -1,11 +1,10 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:crypto_coin/helpers/constans.dart';
-import 'package:crypto_coin/pages/home_page.dart';
-import 'package:crypto_coin/pages/exchange_page.dart';
-import 'package:crypto_coin/pages/coin_list_page.dart';
-import 'package:crypto_coin/pages/profile_page.dart';
+import 'package:crypto_coin/pages/home/home_page.dart';
+import 'package:crypto_coin/pages/exchange/exchange_page.dart';
+import 'package:crypto_coin/pages/coin_list/coin_list_page.dart';
+import 'package:crypto_coin/pages/profile/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:iconsax/iconsax.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -61,31 +60,29 @@ class _BottomNavBarState extends State<BottomNavBar> {
           currentIndex: _currentIndex,
           selectedItemColor: blueColor,
           unselectedItemColor: Colors.grey,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
           onTap: onTapped,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(
-                Ionicons.home_sharp,
+                Iconsax.home_1,
               ),
-              label: 'Home',
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.buy_crypto),
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Ionicons.list,
+                Iconsax.arrow_swap_horizontal,
               ),
-              label: 'Coins',
+              label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Ionicons.swap_horizontal,
-              ),
-              label: 'Exchange',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Ionicons.person,
-              ),
-              label: 'Profile',
+              icon: Icon(Iconsax.user),
+              label: '',
             ),
           ],
         ),
