@@ -1,7 +1,9 @@
 import 'package:crypto_coin/helpers/constans.dart';
+import 'package:crypto_coin/pages/home/assets_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:sizer/sizer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,7 +17,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -29,13 +30,13 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               SizedBox(
-                height: size.height * 0.27,
+                height: 27.h,
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(
-                        top: 10,
-                        left: 40,
+                      padding: EdgeInsets.only(
+                        top: 1.5.h,
+                        left: 9.w,
                       ),
                       child: Align(
                         alignment: Alignment.topRight,
@@ -63,11 +64,13 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SizedBox(
-                      height: size.height * 0.05,
+                      height: 5.h,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 0, horizontal: 15),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 0,
+                        horizontal: 5.w,
+                      ),
                       child: ZoomIn(
                         delay: const Duration(milliseconds: 800),
                         duration: const Duration(seconds: 1),
@@ -76,31 +79,31 @@ class _HomePageState extends State<HomePage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
+                                Text(
                                   '\$5,216.39',
                                   style: TextStyle(
-                                    fontSize: 43,
+                                    fontSize: 30.sp,
                                     color: Colors.white,
                                   ),
                                 ),
                                 CircleAvatar(
-                                  radius: 23,
+                                  radius: 6.w,
                                   backgroundColor:
                                       Colors.white.withOpacity(0.15),
                                   child: Icon(
-                                    Ionicons.analytics,
-                                    size: 27,
+                                    Iconsax.activity,
+                                    size: 3.5.h,
                                     color: Colors.white.withOpacity(0.8),
                                   ),
                                 )
                               ],
                             ),
-                            const Align(
+                            Align(
                               alignment: Alignment.bottomLeft,
                               child: Text(
                                 '+192% all time',
                                 style: TextStyle(
-                                  fontSize: 17,
+                                  fontSize: 13.sp,
                                   color: Colors.white,
                                 ),
                               ),
@@ -112,30 +115,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              Expanded(
-                child: FadeInUp(
-                  delay: const Duration(milliseconds: 300),
-                  duration: const Duration(seconds: 1),
-                  child: Container(
-                    height: size.height,
-                    width: size.width,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                    ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: const [
-                          Text('test'),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              )
+              const AssetsWidget(),
             ],
           ),
         ),
@@ -159,10 +139,11 @@ class _HomePageState extends State<HomePage> {
             borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
           child: Text(
-            categoryType.toShortString(),
+            categoryType.name
+                .replaceAll('_', ' '), // This is new to flutter 2.8
             style: TextStyle(
               color: isSelected ? Colors.white : const Color(0xFFcfcfce),
-              fontSize: 15,
+              fontSize: 11.sp,
             ),
           ),
         ),
