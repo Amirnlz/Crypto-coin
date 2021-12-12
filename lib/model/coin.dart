@@ -39,6 +39,7 @@ class Coin {
     required this.roi,
     required this.lastUpdated,
     required this.sparklineIn7D,
+    required this.priceChangePercentage1YInCurrency,
   });
 
   final String id;
@@ -65,9 +66,10 @@ class Coin {
   final double atl;
   final double atlChangePercentage;
   final DateTime atlDate;
-  final Roi? roi;
+  final Roi roi;
   final DateTime lastUpdated;
   final SparklineIn7D sparklineIn7D;
+  final double priceChangePercentage1YInCurrency;
 
   factory Coin.fromJson(Map<String, dynamic> json) => Coin(
         id: json['id'],
@@ -88,19 +90,26 @@ class Coin {
         marketCapChangePercentage24H:
             json['market_cap_change_percentage_24h'].toDouble(),
         circulatingSupply: json['circulating_supply'].toDouble(),
-        totalSupply:
-            json['total_supply'] == null ? 0 : json['total_supply'].toDouble(),
+        totalSupply: json['total_supply'] == null
+            ? 0.0
+            : json['total_supply'].toDouble(),
         maxSupply:
-            json['max_supply'] == null ? 0 : json['max_supply'].toDouble(),
+            json['max_supply'] == null ? 0.0 : json['max_supply'].toDouble(),
         ath: json['ath'].toDouble(),
         athChangePercentage: json['ath_change_percentage'].toDouble(),
         athDate: DateTime.parse(json['ath_date']),
         atl: json['atl'].toDouble(),
         atlChangePercentage: json['atl_change_percentage'].toDouble(),
         atlDate: DateTime.parse(json['atl_date']),
-        roi: json['roi'] == null ? null : Roi.fromJson(json['roi']),
+        roi: json['roi'] == null
+            ? Roi(times: 0.0, currency: Currency.USD, percentage: 0.0)
+            : Roi.fromJson(json['roi']),
         lastUpdated: DateTime.parse(json['last_updated']),
         sparklineIn7D: SparklineIn7D.fromJson(json['sparkline_in_7d']),
+        priceChangePercentage1YInCurrency:
+            json['price_change_percentage_1y_in_currency'] == null
+                ? 0.0
+                : json['price_change_percentage_1y_in_currency'].toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -128,9 +137,11 @@ class Coin {
         'atl': atl,
         'atl_change_percentage': atlChangePercentage,
         'atl_date': atlDate.toIso8601String(),
-        'roi': roi == null ? null : roi!.toJson(),
+        'roi': roi.toJson(),
         'last_updated': lastUpdated.toIso8601String(),
         'sparkline_in_7d': sparklineIn7D.toJson(),
+        'price_change_percentage_1y_in_currency':
+            priceChangePercentage1YInCurrency,
       };
 }
 
