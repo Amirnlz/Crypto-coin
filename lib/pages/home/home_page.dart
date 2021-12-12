@@ -1,9 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crypto_coin/helpers/constans.dart';
+import 'package:crypto_coin/helpers/extension.dart';
 import 'package:crypto_coin/pages/home/assets_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:sizer/sizer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -30,46 +31,49 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               SizedBox(
-                height: 27.h,
+                height: context.height * 0.27,
                 child: Column(
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                        top: 1.5.h,
-                        left: 9.w,
+                        top: context.height * 0.01,
                       ),
                       child: Align(
                         alignment: Alignment.topRight,
                         child: FadeInRight(
                           duration: const Duration(seconds: 1),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              itemSelction(
-                                CategoryType.Main_Portfolio,
-                                selectedCategory == CategoryType.Main_Portfolio,
-                              ),
-                              itemSelction(
-                                CategoryType.Top_10_coins,
-                                selectedCategory == CategoryType.Top_10_coins,
-                              ),
-                              itemSelction(
-                                CategoryType.Experimental,
-                                selectedCategory == CategoryType.Experimental,
-                              )
-                            ],
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                itemSelction(
+                                  CategoryType.Main_Portfolio,
+                                  selectedCategory ==
+                                      CategoryType.Main_Portfolio,
+                                ),
+                                itemSelction(
+                                  CategoryType.Top_10_coins,
+                                  selectedCategory == CategoryType.Top_10_coins,
+                                ),
+                                itemSelction(
+                                  CategoryType.Experimental,
+                                  selectedCategory == CategoryType.Experimental,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 5.h,
+                      height: context.height * 0.04,
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: 0,
-                        horizontal: 5.w,
+                        horizontal: context.width * 0.05,
                       ),
                       child: ZoomIn(
                         delay: const Duration(milliseconds: 800),
@@ -79,31 +83,31 @@ class _HomePageState extends State<HomePage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const AutoSizeText(
                                   '\$5,216.39',
                                   style: TextStyle(
-                                    fontSize: 30.sp,
+                                    fontSize: 43,
                                     color: Colors.white,
                                   ),
                                 ),
                                 CircleAvatar(
-                                  radius: 6.w,
+                                  radius: context.width * 0.06,
                                   backgroundColor:
                                       Colors.white.withOpacity(0.15),
                                   child: Icon(
                                     Iconsax.activity,
-                                    size: 3.5.h,
+                                    size: context.width * 0.07,
                                     color: Colors.white.withOpacity(0.8),
                                   ),
                                 )
                               ],
                             ),
-                            Align(
+                            const Align(
                               alignment: Alignment.bottomLeft,
-                              child: Text(
+                              child: AutoSizeText(
                                 '+192% all time',
                                 style: TextStyle(
-                                  fontSize: 13.sp,
+                                  fontSize: 17,
                                   color: Colors.white,
                                 ),
                               ),
@@ -138,12 +142,11 @@ class _HomePageState extends State<HomePage> {
             color: isSelected ? Colors.white.withOpacity(0.15) : null,
             borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
-          child: Text(
-            categoryType.name
-                .replaceAll('_', ' '), // This is new to flutter 2.8
+          child: AutoSizeText(
+            categoryType.name.replaceAll('_', ' '),
             style: TextStyle(
               color: isSelected ? Colors.white : const Color(0xFFcfcfce),
-              fontSize: 11.sp,
+              fontSize: 15,
             ),
           ),
         ),

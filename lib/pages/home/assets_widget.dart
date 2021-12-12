@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:crypto_coin/helpers/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 class AssetsWidget extends StatelessWidget {
   const AssetsWidget({
@@ -14,7 +14,7 @@ class AssetsWidget extends StatelessWidget {
         delay: const Duration(milliseconds: 300),
         duration: const Duration(seconds: 1),
         child: Container(
-          width: 500.w,
+          width: context.width,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -23,22 +23,22 @@ class AssetsWidget extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.all(3.h),
+            padding: EdgeInsets.all(context.width * 0.05),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Assets',
                       style: TextStyle(
-                        fontSize: 13.sp,
+                        fontSize: 17,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Icon(
                       Icons.add_outlined,
-                      size: 7.w,
+                      size: context.width * 0.07,
                     ),
                   ],
                 ),

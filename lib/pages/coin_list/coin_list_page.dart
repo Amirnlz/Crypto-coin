@@ -1,9 +1,9 @@
 import 'package:crypto_coin/helpers/constans.dart';
+import 'package:crypto_coin/helpers/extension.dart';
 import 'package:crypto_coin/model/coin.dart';
 import 'package:crypto_coin/service/coin_services.dart';
 import 'package:crypto_coin/pages/coin_list/coin_card.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 class CoinListPage extends StatelessWidget {
   const CoinListPage({Key? key}) : super(key: key);
@@ -26,8 +26,8 @@ class CoinListPage extends StatelessWidget {
                 case ConnectionState.waiting:
                   return Center(
                     child: SizedBox(
-                      height: 10.h,
-                      width: 20.w,
+                      height: context.height * 0.15,
+                      width: context.width * 0.3,
                       child: kLoadingIndecator,
                     ),
                   );
@@ -42,8 +42,8 @@ class CoinListPage extends StatelessWidget {
                     List<Coin> coins = snapshot.data! as List<Coin>;
                     return Container(
                       constraints: BoxConstraints(
-                        minHeight: 100.h,
-                        maxWidth: 100.w,
+                        minHeight: context.height,
+                        maxWidth: context.width,
                       ),
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(

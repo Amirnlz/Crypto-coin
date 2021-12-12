@@ -5,8 +5,6 @@ const String baseurl = 'https://api.coingecko.com/api/v3/';
 const String coinsMarketUrl =
     'coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=1y';
 
-
-
 const kLoadingIndecator = LoadingIndicator(
   indicatorType: Indicator.ballClipRotateMultiple,
   backgroundColor: Colors.transparent,
@@ -25,4 +23,3 @@ enum CategoryType {
   Experimental,
   Top_10_coins,
 }
-

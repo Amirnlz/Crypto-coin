@@ -1,7 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crypto_coin/helpers/constans.dart';
+import 'package:crypto_coin/helpers/extension.dart';
 import 'package:crypto_coin/model/coin.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 class CoinCard extends StatelessWidget {
   const CoinCard({required this.coin, Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class CoinCard extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isOnProfit = coin.priceChangePercentage24H >= 0;
     return SizedBox(
-      height: 12.h,
+      height: context.height * 0.1,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -21,11 +22,11 @@ class CoinCard extends StatelessWidget {
                 coin.image,
                 fit: BoxFit.cover,
               ),
-              radius: 2.5.h,
+              radius: context.width * 0.06,
               backgroundColor: Colors.transparent,
             ),
             SizedBox(
-              width: 5.w,
+              width: context.width * 0.05,
             ),
             Expanded(
               child: Column(
@@ -34,17 +35,17 @@ class CoinCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
+                      AutoSizeText(
                         coin.name,
-                        style: TextStyle(
-                          fontSize: 12.sp,
+                        style: const TextStyle(
+                          fontSize: 15,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Text(
+                      AutoSizeText(
                         '\$${coin.currentPrice.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          fontSize: 12.sp,
+                        style: const TextStyle(
+                          fontSize: 15,
                         ),
                       ),
                     ],
@@ -52,30 +53,30 @@ class CoinCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      AutoSizeText(
                         coin.symbol.toUpperCase(),
-                        style: TextStyle(
-                          fontSize: 11.sp,
+                        style: const TextStyle(
+                          fontSize: 12,
                           color: Colors.grey,
                         ),
                       ),
                       Row(
                         children: [
-                          Text(
+                          AutoSizeText(
                             '\$${coin.priceChange24H.toStringAsFixed(2)}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.grey,
-                              fontSize: 10.sp,
+                              fontSize: 12,
                             ),
                           ),
                           SizedBox(
-                            width: 2.w,
+                            width: context.width * 0.02,
                           ),
-                          Text(
+                          AutoSizeText(
                             '${coin.priceChangePercentage24H.toStringAsFixed(2)}%',
                             style: TextStyle(
                               color: isOnProfit ? greenColor : redColor,
-                              fontSize: 10.sp,
+                              fontSize: 12,
                             ),
                           )
                         ],
