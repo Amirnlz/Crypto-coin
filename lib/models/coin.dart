@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final coin = coinFromJson(jsonString);
-
 import 'dart:convert';
 
 List<Coin> coinFromJson(List<dynamic> data) =>

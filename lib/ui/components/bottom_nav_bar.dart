@@ -1,8 +1,9 @@
-import 'package:crypto_coin/helpers/constans.dart';
-import 'package:crypto_coin/pages/home/home_page.dart';
-import 'package:crypto_coin/pages/exchange/exchange_page.dart';
-import 'package:crypto_coin/pages/coin_list/coin_list_page.dart';
-import 'package:crypto_coin/pages/profile/profile_page.dart';
+import '../screens/home/home_screen.dart';
+
+import '../../blocs/coin/coins_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../screens/coins/coins_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -10,7 +11,7 @@ class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
 
   @override
-  _BottomNavBarState createState() => _BottomNavBarState();
+  State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
@@ -49,44 +50,36 @@ class _BottomNavBarState extends State<BottomNavBar> {
           onPageChanged: (index) {
             setState(() => _currentIndex = index);
           },
-          children: const <Widget>[
-            HomePage(),
-            CoinListPage(),
-            ExchangePage(),
-            ProfilePage(),
+          children: [
+            const HomeScreen(),
+            BlocProvider(
+              create: (context) => CoinsBloc()..add(GetMarketCoins()),
+              child: const CoinsScreen(),
+            ),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
-          selectedItemColor: blueColor,
+          selectedItemColor: const Color(0xFF0567F6),
           unselectedItemColor: Colors.grey,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           onTap: onTapped,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Iconsax.home_1,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.buy_crypto),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Iconsax.arrow_swap_horizontal,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.user),
-              label: '',
-            ),
-          ],
+          items: bottomNavIcons
+              .map((item) => BottomNavigationBarItem(
+                    icon: item,
+                    label: '',
+                  ))
+              .toList(),
         ),
       ),
     );
   }
 }
+
+List<Icon> bottomNavIcons = const [
+  Icon(Iconsax.home_1),
+  Icon(Iconsax.buy_crypto),
+  Icon(Iconsax.arrow_swap_horizontal),
+  Icon(Iconsax.setting),
+];
