@@ -1,9 +1,10 @@
-import '../../../constant/constans.dart';
-import 'coin_list_tile.dart';
-
-import '../../../blocs/coin/coins_bloc.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../blocs/coin/coins_bloc.dart';
+import '../../../constant/constans.dart';
+import 'coin_list_tile.dart';
 
 class CoinsScreen extends StatelessWidget {
   const CoinsScreen({Key? key}) : super(key: key);
@@ -37,11 +38,14 @@ class CoinsScreen extends StatelessWidget {
           ),
         ),
         floatingActionButton: Builder(
-          builder: (context) => FloatingActionButton(
-            onPressed: () {
-              BlocProvider.of<CoinsBloc>(context).add(GetMarketCoins());
-            },
-            child: const Icon(Icons.refresh),
+          builder: (context) => FadeInUp(
+            duration: const Duration(milliseconds: 1500),
+            child: FloatingActionButton(
+              onPressed: () {
+                BlocProvider.of<CoinsBloc>(context).add(GetMarketCoins());
+              },
+              child: const Icon(Icons.refresh),
+            ),
           ),
         ),
       ),
@@ -74,7 +78,10 @@ class CoinsScreen extends StatelessWidget {
       itemCount: coins.length,
       itemBuilder: (context, index) {
         final coin = coins[index];
-        return CoinListTile(coin: coin);
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: CoinListTile(coin: coin),
+        );
       },
     );
   }
