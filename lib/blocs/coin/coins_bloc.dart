@@ -20,7 +20,8 @@ class CoinsBloc extends Bloc<CoinsEvent, CoinsState> {
             emit(CoinsLoaded(coins));
           });
         } catch (e) {
-          emit(CoinsError(error: e.toString()));
+          emit(const CoinsError(
+              error: 'Please check your internet connection!'));
         }
       }
     });

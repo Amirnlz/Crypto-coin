@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 
+import 'assets/coins/asset_coins.dart';
+import 'assets/statistics/assets_statistics.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    Size size = MediaQuery.of(context).size;
+    return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: Text('Home Screen'),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFD0043A1), Color(0xFF0567f4)],
+              begin: Alignment.topRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+          child: Column(
+            children: [
+              AssetsStatistics(height: size.height * 0.27),
+              const AssetCoins(),
+            ],
+          ),
         ),
       ),
     );

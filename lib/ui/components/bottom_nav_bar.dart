@@ -1,11 +1,10 @@
-import '../screens/home/home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../../blocs/coin/coins_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../screens/coins/coins_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import '../screens/home/home_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);

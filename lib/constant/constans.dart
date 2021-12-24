@@ -8,6 +8,12 @@ const String coinMarketRequiredUrl =
 const Color blackColor = Color(0xFF232222);
 const Color blueColor = Color(0xFF0567F6);
 
+enum CategoryType {
+  Main_Portfolio,
+  Experimental,
+  Top_10_coins,
+}
+
 const kLoadingIndecator = LoadingIndicator(
   indicatorType: Indicator.ballClipRotateMultiple,
   backgroundColor: Colors.transparent,
