@@ -2,7 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../blocs/category-item/category_item_bloc.dart';
+import '../../../../../bloc/category-item/category_item_bloc.dart';
 import '../../../../../constant/constans.dart';
 
 class ItemSelection extends StatelessWidget {

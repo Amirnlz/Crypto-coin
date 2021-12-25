@@ -8,7 +8,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -20,9 +19,9 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           child: Column(
-            children: [
-              AssetsStatistics(height: size.height * 0.27),
-              const AssetCoins(),
+            children: const [
+              AssetsStatistics(),
+              AssetCoins(),
             ],
           ),
         ),

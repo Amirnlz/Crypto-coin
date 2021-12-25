@@ -7,6 +7,7 @@ const String coinMarketRequiredUrl =
 
 const Color blackColor = Color(0xFF232222);
 const Color blueColor = Color(0xFF0567F6);
+final Color greyColor = Colors.grey[100]!;
 
 enum CategoryType {
   Main_Portfolio,
@@ -19,4 +20,9 @@ const kLoadingIndecator = LoadingIndicator(
   backgroundColor: Colors.transparent,
   strokeWidth: 3.0,
   colors: [blueColor],
+);
+
+final kTextFieldOutlineBorder = OutlineInputBorder(
+  borderSide: BorderSide(color: Colors.grey.shade400, width: 1.0),
+  borderRadius: BorderRadius.circular(10.0),
 );
