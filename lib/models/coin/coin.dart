@@ -1,7 +1,9 @@
 import 'dart:convert';
 
-List<Coin> coinFromJson(List<dynamic> data) =>
+List<Coin> coinListFromJson(List<dynamic> data) =>
     List<Coin>.from(data.map((x) => Coin.fromJson(x)));
+
+Coin coinFromJson(Map<String, dynamic> data) => Coin.fromJson(data);
 
 String coinToJson(List<Coin> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));

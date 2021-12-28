@@ -52,8 +52,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
           children: [
             const HomeScreen(),
             BlocProvider(
-              create: (context) => CoinsBloc()..add(GetMarketCoins()),
-              child: const CoinsScreen(),
+              create: (context) => CoinBloc()..add(GetMarketCoin()),
+              child: const CoinScreen(),
             ),
           ],
         ),

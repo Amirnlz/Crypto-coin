@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'show_assets.dart';
 
-class AssetCoins extends StatelessWidget {
-  const AssetCoins({Key? key}) : super(key: key);
+class AssetCoin extends StatelessWidget {
+  const AssetCoin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

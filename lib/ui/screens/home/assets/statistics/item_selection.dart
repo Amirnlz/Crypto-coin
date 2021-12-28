@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../bloc/category-item/category_item_bloc.dart';
 import '../../../../../constant/constans.dart';
 
+// TODO: move this class to home folder
 class ItemSelection extends StatelessWidget {
   const ItemSelection({Key? key}) : super(key: key);
 

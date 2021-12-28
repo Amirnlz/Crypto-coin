@@ -6,8 +6,8 @@ import '../../../bloc/coin/coins_bloc.dart';
 import '../../../constant/constans.dart';
 import 'coin_list_tile.dart';
 
-class CoinsScreen extends StatelessWidget {
-  const CoinsScreen({Key? key}) : super(key: key);
+class CoinScreen extends StatelessWidget {
+  const CoinScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +16,20 @@ class CoinsScreen extends StatelessWidget {
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: BlocConsumer<CoinsBloc, CoinsState>(
+          child: BlocConsumer<CoinBloc, CoinListState>(
             listener: (context, state) {
-              if (state is CoinsError) {
+              if (state is CoinListError) {
                 showSnackBar(context, state.message);
               }
             },
             builder: (context, state) {
-              if (state is CoinsLoading) {
+              if (state is CoinListLoading) {
                 return buildLoadingIndicator(
                   size.height * 0.12,
                   size.width * 0.24,
                 );
-              } else if (state is CoinsLoaded) {
-                return buildCoinsList(state.coins);
+              } else if (state is CoinListLoaded) {
+                return buildCoinList(state.coinList);
               }
               return const Center(
                 child: Text('Error loading coins'),
@@ -42,7 +42,7 @@ class CoinsScreen extends StatelessWidget {
             duration: const Duration(milliseconds: 1500),
             child: FloatingActionButton(
               onPressed: () {
-                BlocProvider.of<CoinsBloc>(context).add(GetMarketCoins());
+                BlocProvider.of<CoinBloc>(context).add(GetMarketCoin());
               },
               child: const Icon(Icons.refresh),
             ),
@@ -70,7 +70,7 @@ class CoinsScreen extends StatelessWidget {
     );
   }
 
-  Widget buildCoinsList(final coins) {
+  Widget buildCoinList(final coins) {
     return ListView.builder(
       physics: const BouncingScrollPhysics(
         parent: AlwaysScrollableScrollPhysics(),
