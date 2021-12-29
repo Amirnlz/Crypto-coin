@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-CoinDetails coinDetailsFromJson(String str) =>
-    CoinDetails.fromJson(json.decode(str));
+CoinDetails coinDetailsFromJson(dynamic jsonData) =>
+    CoinDetails.fromJson(jsonData);
 
 String coinDetailsToJson(CoinDetails data) => json.encode(data.toJson());
 
@@ -15,7 +15,6 @@ class CoinDetails {
     required this.symbol,
     required this.name,
     required this.assetPlatformId,
-    required this.platforms,
     required this.blockTimeInMinutes,
     required this.hashingAlgorithm,
     required this.categories,
@@ -49,7 +48,6 @@ class CoinDetails {
   final String symbol;
   final String name;
   final dynamic assetPlatformId;
-  final Platforms platforms;
   final int blockTimeInMinutes;
   final String hashingAlgorithm;
   final List<String> categories;
@@ -69,7 +67,7 @@ class CoinDetails {
   final double developerScore;
   final double communityScore;
   final double liquidityScore;
-  final int publicInterestScore;
+  final double publicInterestScore;
   final MarketData marketData;
   final CommunityData communityData;
   final DeveloperData developerData;
@@ -79,13 +77,12 @@ class CoinDetails {
   final List<Ticker> tickers;
 
   factory CoinDetails.fromJson(Map<String, dynamic> json) => CoinDetails(
-        id: idValues.map[json['id']]!,
+        id: idValues.map[json['id']] ?? Id.UNKNOWN,
         symbol: json['symbol'],
         name: json['name'],
         assetPlatformId: json['asset_platform_id'],
-        platforms: Platforms.fromJson(json['platforms']),
         blockTimeInMinutes: json['block_time_in_minutes'],
-        hashingAlgorithm: json['hashing_algorithm'],
+        hashingAlgorithm: json['hashing_algorithm'] ?? 'unkown',
         categories: List<String>.from(json['categories'].map((x) => x)),
         publicNotice: json['public_notice'],
         additionalNotices:
@@ -106,7 +103,7 @@ class CoinDetails {
         developerScore: json['developer_score'].toDouble(),
         communityScore: json['community_score'].toDouble(),
         liquidityScore: json['liquidity_score'].toDouble(),
-        publicInterestScore: json['public_interest_score'],
+        publicInterestScore: json['public_interest_score'].toDouble(),
         marketData: MarketData.fromJson(json['market_data']),
         communityData: CommunityData.fromJson(json['community_data']),
         developerData: DeveloperData.fromJson(json['developer_data']),
@@ -123,7 +120,6 @@ class CoinDetails {
         'symbol': symbol,
         'name': name,
         'asset_platform_id': assetPlatformId,
-        'platforms': platforms.toJson(),
         'block_time_in_minutes': blockTimeInMinutes,
         'hashing_algorithm': hashingAlgorithm,
         'categories': List<dynamic>.from(categories.map((x) => x)),
@@ -170,18 +166,19 @@ class CommunityData {
   final dynamic facebookLikes;
   final int twitterFollowers;
   final double redditAveragePosts48H;
-  final int redditAverageComments48H;
-  final int redditSubscribers;
-  final int redditAccountsActive48H;
+  final double redditAverageComments48H;
+  final double redditSubscribers;
+  final double redditAccountsActive48H;
   final dynamic telegramChannelUserCount;
 
   factory CommunityData.fromJson(Map<String, dynamic> json) => CommunityData(
         facebookLikes: json['facebook_likes'],
         twitterFollowers: json['twitter_followers'],
         redditAveragePosts48H: json['reddit_average_posts_48h'].toDouble(),
-        redditAverageComments48H: json['reddit_average_comments_48h'],
-        redditSubscribers: json['reddit_subscribers'],
-        redditAccountsActive48H: json['reddit_accounts_active_48h'],
+        redditAverageComments48H:
+            json['reddit_average_comments_48h'].toDouble(),
+        redditSubscribers: json['reddit_subscribers'].toDouble(),
+        redditAccountsActive48H: json['reddit_accounts_active_48h'].toDouble(),
         telegramChannelUserCount: json['telegram_channel_user_count'],
       );
 
@@ -369,7 +366,7 @@ class CodeAdditionsDeletions4Weeks {
       };
 }
 
-enum Id { TETHER, BITCOIN, BINANCE_USD, TRUE_USD, USD_COIN }
+enum Id { TETHER, BITCOIN, BINANCE_USD, TRUE_USD, USD_COIN, UNKNOWN }
 
 final idValues = EnumValues({
   'binance-usd': Id.BINANCE_USD,
@@ -439,7 +436,8 @@ class Links {
         chatUrl: List<String>.from(json['chat_url'].map((x) => x)),
         announcementUrl:
             List<String>.from(json['announcement_url'].map((x) => x)),
-        twitterScreenName: idValues.map[json['twitter_screen_name']]!,
+        twitterScreenName:
+            idValues.map[json['twitter_screen_name']] ?? Id.UNKNOWN,
         facebookUsername: json['facebook_username'],
         bitcointalkThreadIdentifier: json['bitcointalk_thread_identifier'],
         telegramChannelIdentifier: json['telegram_channel_identifier'],
@@ -568,9 +566,9 @@ class MarketData {
   final Map<String, double> priceChangePercentage1YInCurrency;
   final Map<String, double> marketCapChange24HInCurrency;
   final Map<String, double> marketCapChangePercentage24HInCurrency;
-  final int totalSupply;
-  final int maxSupply;
-  final int circulatingSupply;
+  final double totalSupply;
+  final double maxSupply;
+  final double circulatingSupply;
   final Sparkline7D sparkline7D;
   final DateTime lastUpdated;
 
@@ -652,10 +650,13 @@ class MarketData {
         marketCapChangePercentage24HInCurrency:
             Map.from(json['market_cap_change_percentage_24h_in_currency'])
                 .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
-        totalSupply: json['total_supply'],
-        maxSupply: json['max_supply'],
-        circulatingSupply: json['circulating_supply'],
-        sparkline7D: Sparkline7D.fromJson(json['sparkline_7d']),
+        totalSupply: json['total_supply'].toDouble() ?? double.infinity,
+        maxSupply: json['max_supply'].toDouble(),
+        circulatingSupply: json['circulating_supply'].toDouble(),
+        sparkline7D: Sparkline7D.fromJson(json['sparkline_7d'] ??
+            {
+              'price': [],
+            }),
         lastUpdated: DateTime.parse(json['last_updated']),
       );
 
@@ -753,22 +754,6 @@ class Sparkline7D {
       };
 }
 
-class Platforms {
-  Platforms({
-    required this.empty,
-  });
-
-  final String empty;
-
-  factory Platforms.fromJson(Map<String, dynamic> json) => Platforms(
-        empty: json[''],
-      );
-
-  Map<String, dynamic> toJson() => {
-        '': empty,
-      };
-}
-
 class PublicInterestStats {
   PublicInterestStats({
     required this.alexaRank,
@@ -809,7 +794,6 @@ class Ticker {
     required this.tradeUrl,
     required this.tokenInfoUrl,
     required this.coinId,
-    required this.targetCoinId,
   });
 
   final String base;
@@ -829,7 +813,6 @@ class Ticker {
   final String tradeUrl;
   final dynamic tokenInfoUrl;
   final String coinId;
-  final Id targetCoinId;
 
   factory Ticker.fromJson(Map<String, dynamic> json) => Ticker(
         base: json['base'],
@@ -848,12 +831,9 @@ class Ticker {
         lastFetchAt: DateTime.parse(json['last_fetch_at']),
         isAnomaly: json['is_anomaly'],
         isStale: json['is_stale'],
-        tradeUrl: json['trade_url'],
+        tradeUrl: json['trade_url'] ?? '',
         tokenInfoUrl: json['token_info_url'],
         coinId: json['coin_id'],
-        targetCoinId: json['target_coin_id'] == null
-            ? Id.TRUE_USD
-            : idValues.map[json['target_coin_id']]!,
       );
 
   Map<String, dynamic> toJson() => {
@@ -876,7 +856,6 @@ class Ticker {
         'trade_url': tradeUrl,
         'token_info_url': tokenInfoUrl,
         'coin_id': coinId,
-        'target_coin_id': idValues.reverse[targetCoinId],
       };
 }
 

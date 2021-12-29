@@ -8,8 +8,13 @@ class GetWalletCoin extends CoinWalletEvent {}
 class AddCoinToWallet extends CoinWalletEvent {
   final String coinId;
   final double amount;
+  final List<CoinWallet> coinWalletList;
 
-  AddCoinToWallet({required this.coinId, required this.amount});
+  AddCoinToWallet({
+    required this.coinId,
+    required this.amount,
+    this.coinWalletList = const [],
+  });
 }
 
 class RemoveCoinFromWallet extends CoinWalletEvent {}

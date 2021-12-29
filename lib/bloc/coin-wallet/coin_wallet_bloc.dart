@@ -20,20 +20,30 @@ class CoinWalletBloc extends Bloc<CoinWalletEvent, CoinWalletState> {
         emit(CoinWalletLoaded(coinsWallet: state.coinsWallet));
       } else if (event is AddCoinToWallet) {
         emit(const CoinWalletLoading());
-        final coinWallet = await getCoinWallet(event.coinId, event.amount);
-        final newList = [...state.coinsWallet];
-        newList.add(coinWallet);
-        print(newList.length);
-        newList.forEach((element) {
-          print(element.coin.name);
-        });
+
+        final newList = await getNewCoinWalletList(
+            event.coinWalletList, event.coinId, event.amount);
+
         emit(CoinWalletLoaded(coinsWallet: newList));
       }
     });
   }
 
+  Future<List<CoinWallet>> getNewCoinWalletList(
+    List<CoinWallet> prevCoinList,
+    String coinId,
+    double amount,
+  ) async {
+    final coinWallet = await getCoinWallet(coinId, amount);
+
+    final newList = [...prevCoinList];
+    newList.add(coinWallet);
+
+    return newList;
+  }
+
   Future<CoinWallet> getCoinWallet(String coinId, double amount) async {
-    final coin = await _repository.fetchCoinById(coinId);
+    final coin = await _repository.fetchCoinDetailsById(coinId);
     return CoinWallet(
       coin: coin,
       amount: amount,

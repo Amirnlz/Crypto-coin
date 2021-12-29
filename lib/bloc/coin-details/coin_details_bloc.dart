@@ -12,7 +12,6 @@ class CoinDetailsBloc extends Bloc<CoinDetailsEvent, CoinDetailsState> {
   CoinDetailsBloc() : super(const CoinDetailsInitial()) {
     on<CoinDetailsEvent>(
       (event, emit) {
-        print(event);
         if (event is GetCoinDetailsById) {
           emit(const CoinDetailsLoading());
           _repository.fetchCoinDetailsById(event.id).then(

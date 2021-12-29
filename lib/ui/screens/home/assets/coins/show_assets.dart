@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../bloc/coin-wallet/coin_wallet_bloc.dart';
 import '../../../../../constant/constans.dart';
 import '../bottomSheet/add_coin_bottom_sheet.dart';
+import 'asset_coin_list_tile.dart';
 
 class ShowAssets extends StatelessWidget {
   const ShowAssets({
@@ -50,8 +51,7 @@ class ShowAssets extends StatelessWidget {
 
   Widget buildItems(CoinWalletLoaded state, Size size) {
     int length = state.coinsWallet.length;
-    print(length);
-    print(state.coinsWallet);
+    print('length: $length');
 
     return Expanded(
       child: Container(
@@ -60,9 +60,12 @@ class ShowAssets extends StatelessWidget {
           maxWidth: size.width * 0.9,
         ),
         child: ListView.builder(
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
           itemCount: length,
           itemBuilder: (context, index) {
-            return Text(state.coinsWallet[index].coin.name);
+            return AssetCoinListTile(coinWallet: state.coinsWallet[index]);
           },
         ),
       ),

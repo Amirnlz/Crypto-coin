@@ -12,7 +12,6 @@ class CoinBloc extends Bloc<CoinEvent, CoinListState> {
 
   CoinBloc() : super(const CoinListInitial()) {
     on<CoinEvent>((event, emit) async {
-      print(event);
       if (event is GetMarketCoin) {
         emit(const CoinListLoading());
         try {

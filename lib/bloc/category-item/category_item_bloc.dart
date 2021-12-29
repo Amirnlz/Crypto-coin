@@ -10,7 +10,6 @@ part 'category_item_state.dart';
 class CategoryItemsBloc extends Bloc<CategoryItemEvent, CategoryItemState> {
   CategoryItemsBloc() : super(const CategoryItemInitial()) {
     on<CategoryItemEvent>((event, emit) {
-      print(event);
       if (event is LoadCategoryItemEvent) {
         emit(ChangedCategoryItemState(state.items));
       } else if (event is ChangeCategoryItemEvent) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../constant/constans.dart';
@@ -7,10 +6,17 @@ import '../../../../../../constant/extension/extension.dart';
 import '../../../../../../models/coin/supported_coin.dart';
 import '../../../../../bloc/coin-wallet/coin_wallet_bloc.dart';
 
-class InputWidgets extends StatelessWidget {
-  InputWidgets({required this.coins, Key? key}) : super(key: key);
-  final TextEditingController _controller = TextEditingController();
+class InputWidgets extends StatefulWidget {
+  const InputWidgets({required this.coins, Key? key}) : super(key: key);
   final List<SupportedCoin> coins;
+
+  @override
+  State<InputWidgets> createState() => _InputWidgetsState();
+}
+
+class _InputWidgetsState extends State<InputWidgets> {
+  final TextEditingController _controller = TextEditingController();
+  String _selectedCoin = 'bitcoin';
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +48,6 @@ class InputWidgets extends StatelessWidget {
       child: TextField(
         controller: _controller,
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'),
-              replacementString: ''),
-        ],
         decoration: InputDecoration(
           enabledBorder: kTextFieldOutlineBorder,
           focusedBorder: kTextFieldOutlineBorder,
@@ -71,11 +73,16 @@ class InputWidgets extends StatelessWidget {
         color: greyColor,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-            color: Colors.grey.shade400, style: BorderStyle.solid, width: 1.0),
+          color: Colors.grey.shade400,
+          style: BorderStyle.solid,
+          width: 1.0,
+        ),
       ),
       child: DropdownButton(
-        onChanged: (value) {},
-        value: 'bitcoin',
+        onChanged: (value) => setState(
+          () => _selectedCoin = value.toString(),
+        ),
+        value: _selectedCoin,
         items: _dropdownMenuItem(),
         icon: const Icon(Icons.arrow_drop_down),
         isExpanded: true,
@@ -89,38 +96,58 @@ class InputWidgets extends StatelessWidget {
     return SizedBox(
       height: heigth,
       width: width,
-      child: Builder(builder: (context) {
-        return ElevatedButton(
-          onPressed: () {
-            BlocProvider.of<CoinWalletBloc>(context)
-                .add(AddCoinToWallet(coinId: 'bitcoin', amount: 1));
-            Navigator.pop(context);
-          },
-          style: ElevatedButton.styleFrom(
-            primary: blueColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+      child: Builder(
+        builder: (context) {
+          return ElevatedButton(
+            onPressed: () {
+              final alreadyCreatedList =
+                  BlocProvider.of<CoinWalletBloc>(context).state.coinsWallet;
+
+              BlocProvider.of<CoinWalletBloc>(context).add(
+                AddCoinToWallet(
+                  coinId: _selectedCoin,
+                  amount: coinAmount,
+                  coinWalletList: alreadyCreatedList,
+                ),
+              );
+              Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(
+              primary: blueColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              elevation: 10,
             ),
-            elevation: 10,
-          ),
-          child: const Text(
-            'Add to wallet',
-          ),
-        );
-      }),
+            child: const Text(
+              'Add to wallet',
+            ),
+          );
+        },
+      ),
     );
   }
 
   List<DropdownMenuItem<String>> _dropdownMenuItem() {
-    return coins
-        .map((value) => DropdownMenuItem<String>(
-              value: value.id,
-              child: Text(
-                value.name.capitalize(),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ))
+    return widget.coins
+        .map(
+          (value) => DropdownMenuItem<String>(
+            value: value.id,
+            child: Text(
+              value.name.capitalize(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        )
         .toList();
+  }
+
+  double get coinAmount {
+    try {
+      return double.parse(_controller.text);
+    } catch (e) {
+      return 0.0;
+    }
   }
 }
