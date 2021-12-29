@@ -24,6 +24,25 @@ class AssetCoinListTile extends StatelessWidget {
     );
   }
 
+  CircleAvatar leadingImage() {
+    return CircleAvatar(
+      backgroundImage: NetworkImage(coinWallet.imageUrl),
+      backgroundColor: Colors.transparent,
+    );
+  }
+
+  Row titleWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(coinWallet.name),
+        Text(
+          '\$' + coinWallet.currentPrice.divideWithComma,
+        ),
+      ],
+    );
+  }
+
   Row subtitleWidget() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,9 +59,9 @@ class AssetCoinListTile extends StatelessWidget {
     return Row(
       children: [
         Text(
-          coinWallet.priceChange24H.toString().getCoinStatusSign +
+          coinWallet.priceChange24H.getCoinStatusSign +
               '\$' +
-              coinWallet.priceChange24H.toStringAsFixed(2).coinWithoutSign(),
+              coinWallet.priceChange24H.divideWithComma.coinWithoutSign,
         ),
         const SizedBox(
           width: 8,
@@ -54,25 +73,6 @@ class AssetCoinListTile extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Row titleWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(coinWallet.name),
-        Text(
-          '\$' + coinWallet.currentPrice.toString(),
-        ),
-      ],
-    );
-  }
-
-  CircleAvatar leadingImage() {
-    return CircleAvatar(
-      backgroundImage: NetworkImage(coinWallet.imageUrl),
-      backgroundColor: Colors.transparent,
     );
   }
 }

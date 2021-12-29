@@ -134,7 +134,7 @@ class _InputWidgetsState extends State<InputWidgets> {
           (value) => DropdownMenuItem<String>(
             value: value.id,
             child: Text(
-              value.name.capitalize(),
+              value.name.capitalize,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

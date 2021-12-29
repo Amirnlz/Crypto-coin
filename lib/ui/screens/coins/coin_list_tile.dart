@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:crypto_coin/constant/extension/extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/coin/coin.dart';
@@ -54,7 +55,7 @@ class CoinListTile extends StatelessWidget {
       children: [
         Text(coin.name),
         Text(
-          '\$' + coin.currentPrice.toString(),
+          '\$' + coin.currentPrice.divideWithComma,
           overflow: TextOverflow.ellipsis,
         ),
       ],
@@ -65,11 +66,13 @@ class CoinListTile extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(coin.symbol),
+        Text(coin.symbol.toUpperCase()),
         Row(
           children: [
             Text(
-              '\$' + coin.priceChange24H.toStringAsFixed(2),
+              coin.priceChange24H.getCoinStatusSign +
+                  '\$' +
+                  coin.priceChange24H.divideWithComma.coinWithoutSign,
               overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(width: 8),
