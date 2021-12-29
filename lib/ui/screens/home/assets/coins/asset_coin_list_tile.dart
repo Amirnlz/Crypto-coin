@@ -1,5 +1,5 @@
-import 'package:crypto_coin/constant/extension/extension.dart';
-import 'package:crypto_coin/models/wallet/coin_wallet.dart';
+import '../../../../../constant/extension/extension.dart';
+import '../../../../../models/wallet/coin_wallet.dart';
 import 'package:flutter/material.dart';
 
 class AssetCoinListTile extends StatelessWidget {

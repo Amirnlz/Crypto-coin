@@ -1,4 +1,5 @@
-import '../../../../../../bloc/supported-coin/supported_coin_bloc.dart';
+import '../../../../../bloc/coin/coins_bloc.dart';
+
 import '../../../../../../constant/constans.dart';
 import 'input_widgets.dart';
 import 'package:flutter/material.dart';
@@ -10,17 +11,17 @@ class AddingElements extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return BlocConsumer<SupportedCoinBloc, SupportedCoinListState>(
+    return BlocConsumer<CoinBloc, CoinListState>(
       listener: (context, state) {
-        if (state is SupportedCoinError) {
+        if (state is CoinListError) {
           showSnackBar(context, state.message);
         }
       },
       builder: (context, state) {
-        if (state is SupportedCoinLoading) {
+        if (state is CoinListLoading) {
           return buildLoading(size.height * 0.1, size.width * 0.2);
-        } else if (state is SupportedCoinLoaded) {
-          return buildInputWidgets(state.supportedCoin, size);
+        } else if (state is CoinListLoaded) {
+          return buildInputWidgets(state.coinList, size);
         }
         return const Center(
           child: Text('Error loading Coin List.'),
@@ -29,9 +30,9 @@ class AddingElements extends StatelessWidget {
     );
   }
 
-  Widget buildInputWidgets(final supportedCoin, Size size) {
+  Widget buildInputWidgets(final coinList, Size size) {
     return InputWidgets(
-      coins: supportedCoin,
+      coins: coinList,
     );
   }
 

@@ -43,7 +43,7 @@ class CoinWalletBloc extends Bloc<CoinWalletEvent, CoinWalletState> {
   }
 
   Future<CoinWallet> getCoinWallet(String coinId, double amount) async {
-    final coin = await _repository.fetchCoinDetailsById(coinId);
+    final coin = await _repository.fetchCoinById(coinId);
     return CoinWallet(
       coin: coin,
       amount: amount,

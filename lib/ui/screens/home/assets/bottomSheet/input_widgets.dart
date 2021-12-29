@@ -1,14 +1,14 @@
+import '../../../../../models/coin/coin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../constant/constans.dart';
 import '../../../../../../constant/extension/extension.dart';
-import '../../../../../../models/coin/supported_coin.dart';
 import '../../../../../bloc/coin-wallet/coin_wallet_bloc.dart';
 
 class InputWidgets extends StatefulWidget {
   const InputWidgets({required this.coins, Key? key}) : super(key: key);
-  final List<SupportedCoin> coins;
+  final List<Coin> coins;
 
   @override
   State<InputWidgets> createState() => _InputWidgetsState();

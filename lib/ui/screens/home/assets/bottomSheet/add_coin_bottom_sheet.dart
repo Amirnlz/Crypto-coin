@@ -1,3 +1,5 @@
+import '../../../../../bloc/coin/coins_bloc.dart';
+
 import '../../../../../bloc/supported-coin/supported_coin_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +27,7 @@ class AddCoinBottomSheet extends StatelessWidget {
           ),
         ),
         child: BlocProvider(
-          create: (context) => SupportedCoinBloc()..add(GetSupportedCoin()),
+          create: (context) => CoinBloc()..add(GetMarketCoin()),
           child: const AddingElements(),
         ),
       ),
