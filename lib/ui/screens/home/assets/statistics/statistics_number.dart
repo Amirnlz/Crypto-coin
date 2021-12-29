@@ -1,5 +1,8 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:crypto_coin/bloc/coin-wallet/coin_wallet_bloc.dart';
+import 'package:crypto_coin/constant/extension/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
 class StatisticsNumber extends StatelessWidget {
@@ -19,42 +22,85 @@ class StatisticsNumber extends StatelessWidget {
           vertical: 0,
           horizontal: size.width * 0.01,
         ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  '\$5,216.39',
-                  style: TextStyle(
-                    fontSize: 43,
-                    color: Colors.white,
-                  ),
-                ),
-                CircleAvatar(
-                  radius: size.width * 0.06,
-                  backgroundColor: Colors.white.withOpacity(0.15),
-                  child: Icon(
-                    Iconsax.activity,
-                    size: size.width * 0.07,
-                    color: Colors.white.withOpacity(0.8),
-                  ),
-                )
-              ],
-            ),
-            const Align(
-              alignment: Alignment.bottomLeft,
-              child: Text(
-                '+192% all time',
-                style: TextStyle(
-                  fontSize: 17,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
+        child: BlocBuilder<CoinWalletBloc, CoinWalletState>(
+          builder: (context, state) {
+            if (state is CoinWalletListLoaded) {
+              return buildStatics(
+                  state.totalAmount, state.totalProfitPercentage, size);
+            }
+            return buildStarterStatic(size);
+          },
         ),
       ),
+    );
+  }
+
+  Column buildStatics(double amount, double percent, Size size) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            assetsToNumber(amount),
+            CircleAvatar(
+              radius: size.width * 0.06,
+              backgroundColor: Colors.white.withOpacity(0.15),
+              child: Icon(
+                Iconsax.activity,
+                size: size.width * 0.07,
+                color: Colors.white.withOpacity(0.8),
+              ),
+            )
+          ],
+        ),
+        assetsProfitPercentage(percent),
+      ],
+    );
+  }
+
+  Text assetsToNumber(double amount) {
+    return Text(
+      '\$${amount.divideWithComma}',
+      style: const TextStyle(
+        fontSize: 43,
+        color: Colors.white,
+      ),
+    );
+  }
+
+  Align assetsProfitPercentage(double percentage) {
+    return Align(
+      alignment: Alignment.bottomLeft,
+      child: Text(
+        '${percentage.toStringAsFixed(2)}% all time',
+        style: const TextStyle(
+          fontSize: 17,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  Widget buildStarterStatic(Size size) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            assetsToNumber(0),
+            CircleAvatar(
+              radius: size.width * 0.06,
+              backgroundColor: Colors.white.withOpacity(0.15),
+              child: Icon(
+                Iconsax.activity,
+                size: size.width * 0.07,
+                color: Colors.white.withOpacity(0.8),
+              ),
+            )
+          ],
+        ),
+        assetsProfitPercentage(0),
+      ],
     );
   }
 }

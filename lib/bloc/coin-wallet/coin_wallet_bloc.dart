@@ -13,32 +13,58 @@ class CoinWalletBloc extends Bloc<CoinWalletEvent, CoinWalletState> {
   final _repository = CoinRepository();
 
   CoinWalletBloc() : super(const CoinWalletInitial()) {
-    on<CoinWalletEvent>((event, emit) async {
-      print(event);
+    on<CoinWalletEvent>(
+      (event, emit) async {
+        if (event is GetCoinWallet) {
+          emit(CoinWalletListLoaded(coinsWallet: state.coinsWallet));
+        } else if (event is AddCoinToWallet) {
+          emit(const CoinWalletLoading());
+          try {
+            final newList = await getNewCoinWalletList(
+                event.coinWalletList, event.coinId, event.amount);
+            final totalAmount = sumAssetsAmount(newList);
+            final totalProfitPercent = sumProfitPercent(newList);
 
-      if (event is GetWalletCoin) {
-        emit(CoinWalletLoaded(coinsWallet: state.coinsWallet));
-      } else if (event is AddCoinToWallet) {
-        emit(const CoinWalletLoading());
+            emit(CoinWalletListLoaded(
+                coinsWallet: newList,
+                amount: totalAmount,
+                profitPercentage: totalProfitPercent));
+          } catch (e) {
+            emit(const CoinWalletError(error: 'Error adding coin to wallet'));
+          }
+        }
+      },
+    );
+  }
 
-        final newList = await getNewCoinWalletList(
-            event.coinWalletList, event.coinId, event.amount);
+  double sumAssetsAmount(List<CoinWallet> list) {
+    double totalAmount = 0;
+    for (var coin in list) {
+      totalAmount += coin.currentPrice;
+    }
+    return totalAmount;
+  }
 
-        emit(CoinWalletLoaded(coinsWallet: newList));
-      }
-    });
+  double sumProfitPercent(List<CoinWallet> list) {
+    double totalProfitPercent = 0;
+    for (var coin in list) {
+      totalProfitPercent += coin.priceChangePercentage24H;
+    }
+    return totalProfitPercent;
   }
 
   Future<List<CoinWallet>> getNewCoinWalletList(
-    List<CoinWallet> prevCoinList,
-    String coinId,
-    double amount,
-  ) async {
-    final coinWallet = await getCoinWallet(coinId, amount);
-
+      List<CoinWallet> prevCoinList, String coinId, double amount) async {
     final newList = [...prevCoinList];
-    newList.add(coinWallet);
 
+    if (isCoinAlreadyInWallet(prevCoinList, coinId)) {
+      int index = getIndexOfCoinInWallet(prevCoinList, coinId);
+      newList[index].sumWithAmount(amount);
+    } else {
+      final coinWallet = await getCoinWallet(coinId, amount);
+
+      newList.add(coinWallet);
+    }
     return newList;
   }
 
@@ -48,5 +74,23 @@ class CoinWalletBloc extends Bloc<CoinWalletEvent, CoinWalletState> {
       coin: coin,
       amount: amount,
     );
+  }
+
+  bool isCoinAlreadyInWallet(List<CoinWallet> list, String coinId) {
+    for (var coin in list) {
+      if (coin.id == coinId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  int getIndexOfCoinInWallet(List<CoinWallet> list, String coinId) {
+    for (var coin in list) {
+      if (coin.id == coinId) {
+        return list.indexOf(coin);
+      }
+    }
+    return -1;
   }
 }

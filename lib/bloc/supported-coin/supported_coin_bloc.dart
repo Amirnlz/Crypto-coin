@@ -12,7 +12,6 @@ class SupportedCoinBloc
 
   SupportedCoinBloc() : super(const SupportedCoinInitial()) {
     on<SupportedCoinEvent>((event, emit) async {
-      print(event);
       if (event is GetSupportedCoin) {
         emit(const SupportedCoinLoading());
         try {

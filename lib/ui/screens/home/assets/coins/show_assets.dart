@@ -34,11 +34,11 @@ class ShowAssets extends StatelessWidget {
           ),
           BlocBuilder(
             bloc: BlocProvider.of<CoinWalletBloc>(context)
-              ..add(GetWalletCoin()),
+              ..add(GetCoinWallet()),
             builder: (context, state) {
               if (state is CoinWalletLoading) {
                 return buildLoadingWidget(size);
-              } else if (state is CoinWalletLoaded) {
+              } else if (state is CoinWalletListLoaded) {
                 return buildItems(state, size);
               }
               return const Text('There is no Coin');
@@ -49,10 +49,8 @@ class ShowAssets extends StatelessWidget {
     );
   }
 
-  Widget buildItems(CoinWalletLoaded state, Size size) {
+  Widget buildItems(CoinWalletListLoaded state, Size size) {
     int length = state.coinsWallet.length;
-    print('length: $length');
-
     return Expanded(
       child: Container(
         constraints: BoxConstraints(
