@@ -1,3 +1,5 @@
+import 'package:animate_do/animate_do.dart';
+
 import '../../../../../constant/extension/extension.dart';
 import '../../../../../models/wallet/coin_wallet.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +19,13 @@ class AssetCoinListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: leadingImage(),
-      title: titleWidget(),
-      subtitle: subtitleWidget(),
+    return FadeInUp(
+      duration: const Duration(seconds: 1),
+      child: ListTile(
+        leading: leadingImage(),
+        title: titleWidget(),
+        subtitle: subtitleWidget(),
+      ),
     );
   }
 

@@ -34,7 +34,13 @@ class ShowAssets extends StatelessWidget {
           ),
           BlocBuilder(
             bloc: BlocProvider.of<CoinWalletBloc>(context)
-              ..add(GetCoinWallet()),
+              ..add(
+                GetCoinWallet(
+                  coinWalletList: BlocProvider.of<CoinWalletBloc>(context)
+                      .state
+                      .coinsWallet,
+                ),
+              ),
             builder: (context, state) {
               if (state is CoinWalletLoading) {
                 return buildLoadingWidget(size);

@@ -1,4 +1,3 @@
-// ignore_for_file: avoid_function_literals_in_foreach_calls
 
 import 'package:bloc/bloc.dart';
 import 'package:crypto_coin/resources/coin_repository.dart';
@@ -16,7 +15,20 @@ class CoinWalletBloc extends Bloc<CoinWalletEvent, CoinWalletState> {
     on<CoinWalletEvent>(
       (event, emit) async {
         if (event is GetCoinWallet) {
-          emit(CoinWalletListLoaded(coinsWallet: state.coinsWallet));
+          if (event.coinWalletList.isNotEmpty) {
+
+            final totalAmount = sumAssetsAmount(event.coinWalletList);
+            final totalProfitPercent = sumProfitPercent(event.coinWalletList);
+
+            emit(CoinWalletListLoaded(
+              coinsWallet: event.coinWalletList,
+              amount: totalAmount,
+              profitPercentage: totalProfitPercent,
+            ));
+          } else {
+
+            emit(CoinWalletListLoaded(coinsWallet: state.coinsWallet));
+          }
         } else if (event is AddCoinToWallet) {
           emit(const CoinWalletLoading());
           try {
