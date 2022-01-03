@@ -26,7 +26,7 @@ class CoinApiProvider {
   }
 
   Future<CoinDetails> fetchCoinDetailsById(String id) async {
-    final response = await _clinet.get('/coins/$id');
+    final response = await _clinet.get('/coins/$id?sparkline=true');
     if (response.statusCode == 200) {
       return coinDetailsFromJson(response.data);
     } else {

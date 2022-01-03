@@ -431,7 +431,9 @@ class MarketData {
             json['circulating_supply'].toDouble() ?? double.infinity,
         sparkline7D: Sparkline7D.fromJson(json['sparkline_7d'] ??
             {
-              'price': [],
+              'price': [
+                0,
+              ],
             }),
         lastUpdated: DateTime.parse(json['last_updated']),
       );
