@@ -1,10 +1,10 @@
-import '../../../../../models/coin/coin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../constant/constans.dart';
 import '../../../../../../constant/extension/extension.dart';
 import '../../../../../bloc/coin-wallet/coin_wallet_bloc.dart';
+import '../../../../../models/coin/coin.dart';
 
 class InputWidgets extends StatefulWidget {
   const InputWidgets({required this.coins, Key? key}) : super(key: key);

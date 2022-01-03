@@ -1,9 +1,10 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:crypto_coin/bloc/coin-wallet/coin_wallet_bloc.dart';
-import 'package:crypto_coin/constant/extension/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../../../bloc/coin-wallet/coin_wallet_bloc.dart';
+import '../../../../../constant/extension/extension.dart';
 
 class StatisticsNumber extends StatelessWidget {
   const StatisticsNumber({

@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import '../../../../widget/coin-details/screen/coin_detail_screen.dart';
 
 import '../../../../../constant/extension/extension.dart';
 import '../../../../../models/wallet/coin_wallet.dart';
@@ -21,10 +22,18 @@ class AssetCoinListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeInUp(
       duration: const Duration(seconds: 1),
-      child: ListTile(
-        leading: leadingImage(),
-        title: titleWidget(),
-        subtitle: subtitleWidget(),
+      child: GestureDetector(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CoinDetailScreen(coinId: coinWallet.id),
+          ),
+        ),
+        child: ListTile(
+          leading: leadingImage(),
+          title: titleWidget(),
+          subtitle: subtitleWidget(),
+        ),
       ),
     );
   }
@@ -66,7 +75,7 @@ class AssetCoinListTile extends StatelessWidget {
         Text(
           coinWallet.priceChange24H.getCoinStatusSign +
               '\$' +
-              coinWallet.priceChange24H.divideWithComma.coinWithoutSign,
+              coinWallet.priceChange24H.divideWithComma,
         ),
         const SizedBox(
           width: 8,
