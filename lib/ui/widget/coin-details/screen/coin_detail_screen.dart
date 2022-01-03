@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../bloc/coin-details/coin_details_bloc.dart';
 import '../../../../constant/constans.dart';
 import '../../../../models/coin/coin_details.dart';
-import '../view/coin_details_widget.dart';
+import 'view/coin_details_widget.dart';
 
 class CoinDetailScreen extends StatelessWidget {
   const CoinDetailScreen({required this.coinId, Key? key}) : super(key: key);

@@ -1,9 +1,9 @@
 
 import 'package:bloc/bloc.dart';
-import 'package:crypto_coin/resources/coin_repository.dart';
 import 'package:meta/meta.dart';
 
 import '../../models/wallet/coin_wallet.dart';
+import '../../resources/coin_repository.dart';
 
 part 'coin_wallet_event.dart';
 part 'coin_wallet_state.dart';

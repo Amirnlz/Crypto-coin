@@ -1,9 +1,9 @@
 import 'package:animate_do/animate_do.dart';
-import '../../../../widget/coin-details/screen/coin_detail_screen.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../../constant/extension/extension.dart';
 import '../../../../../models/wallet/coin_wallet.dart';
-import 'package:flutter/material.dart';
+import '../../../../widget/coin-details/screen/coin_detail_screen.dart';
 
 class AssetCoinListTile extends StatelessWidget {
   const AssetCoinListTile({required this.coinWallet, Key? key})

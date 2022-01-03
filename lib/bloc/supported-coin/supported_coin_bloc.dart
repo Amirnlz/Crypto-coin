@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+
 import '../../models/coin/supported_coin.dart';
 import '../../resources/coin_repository.dart';
-import 'package:meta/meta.dart';
 
 part 'supported_coin_event.dart';
 part 'supported_coin_state.dart';
