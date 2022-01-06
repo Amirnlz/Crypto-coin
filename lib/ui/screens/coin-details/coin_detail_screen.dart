@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../bloc/coin-details/coin_details_bloc.dart';
-import '../../../../constant/constans.dart';
-import '../../../../models/coin/coin_details.dart';
-import 'view/coin_details_widget.dart';
+import '../../../bloc/coin-details/coin_details_bloc.dart';
+import '../../../constant/constans.dart';
+import '../../../models/coin/coin_details.dart';
+import 'widgets/coin_details_widget.dart';
 
 class CoinDetailScreen extends StatelessWidget {
   const CoinDetailScreen({required this.coinId, Key? key}) : super(key: key);
@@ -26,7 +26,6 @@ class CoinDetailScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            print('coin Id: $coinId');
             if (state is CoinDetailsLoading) {
               return showLoading(size.height * 0.12, size.width * 0.24);
             } else if (state is CoinDetailsLoaded) {

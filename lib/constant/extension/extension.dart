@@ -19,6 +19,14 @@ extension StringExtension on String {
       return -1;
     }
   }
+
+  String get removeHTMLTags {
+    return replaceAll(RegExp(r'<[^>]*>'), '');
+  }
+
+  int get numberOfpharagraphes {
+    return split('.').length;
+  }
 }
 
 extension DoubleExtension on double {

@@ -21,6 +21,9 @@ class CoinLineChartData {
         ],
         borderData: _flBorderData,
         minY: _sparkline7D.price.reduce(min),
+        maxY: _sparkline7D.price.reduce(max),
+        minX: 0,
+        maxX: _sparkline7D.price.length - 1,
       );
 
   FlTitlesData get _flTitlesData => FlTitlesData(
