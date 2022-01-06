@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../models/coin/coin_details.dart';
 import 'description/coin_description.dart';
 import 'list-tile/coin_details_list_tile.dart';
+import 'market-info/market_info.dart';
 import 'statistics/coin_details_statistics.dart';
 
 class CoinDetailsWidget extends StatelessWidget {
@@ -40,6 +41,10 @@ class CoinDetailsWidget extends StatelessWidget {
             const SizedBox(height: 20),
             CoinDescription(
               description: coinDetails.description.en,
+            ),
+            horizontalLine(size),
+            MarketInfo(
+              marketData: coinDetails.marketData,
             ),
           ],
         ),

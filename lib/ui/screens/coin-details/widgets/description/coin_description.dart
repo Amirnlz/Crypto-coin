@@ -1,4 +1,4 @@
-import 'package:crypto_coin/constant/extension/extension.dart';
+import '../../../../../constant/extension/extension.dart';
 import 'package:flutter/material.dart';
 
 class CoinDescription extends StatefulWidget {

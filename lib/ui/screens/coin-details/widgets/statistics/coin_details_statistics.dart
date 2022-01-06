@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import '../../../../widget/market_box.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../constant/extension/extension.dart';
@@ -25,9 +28,20 @@ class CoinDetailsStatistics extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        marketBox('Low', marketData.atl['usd']!, false),
-        marketBox('High', marketData.ath['usd']!, false),
-        marketBox('Vol', marketData.totalVolume['usd']!, true),
+        MarketBox(
+          title: 'Low',
+          subtitle:
+              '\$' + marketData.sparkline7D.price.reduce(min).divideWithComma,
+        ),
+        MarketBox(
+          title: 'High',
+          subtitle:
+              '\$' + marketData.sparkline7D.price.reduce(max).divideWithComma,
+        ),
+        MarketBox(
+          title: 'Vol',
+          subtitle: '\$' + marketData.totalVolume['usd']!.thousandsFormatter,
+        ),
       ],
     );
   }

@@ -1,9 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
-import '../coin-details/coin_detail_screen.dart';
 import '../../../constant/extension/extension.dart';
 import '../../../models/coin/coin.dart';
+import '../coin-details/coin_detail_screen.dart';
 
 class CoinListTile extends StatelessWidget {
   const CoinListTile({required this.coin, Key? key}) : super(key: key);

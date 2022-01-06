@@ -1,10 +1,11 @@
 import 'dart:math';
 
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+
 import '../../../../../../../constant/constans.dart';
 import '../../../../../../../constant/extension/extension.dart';
 import '../../../../../../../models/coin/coin_details.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
 
 class CoinLineChartData {
   final Sparkline7D _sparkline7D;
