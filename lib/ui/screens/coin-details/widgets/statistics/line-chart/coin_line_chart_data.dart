@@ -4,7 +4,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../constant/constans.dart';
-import '../../../../../../../constant/extension/extension.dart';
 import '../../../../../../../models/coin/coin_details.dart';
 
 class CoinLineChartData {
@@ -62,9 +61,9 @@ class CoinLineChartData {
 
   List<FlSpot> get chartDataSpots => _sparkline7D.price
       .map(
-        (e) => FlSpot(
-          _sparkline7D.price.indexOf(e).toDouble(),
-          e.removeDecimal,
+        (value) => FlSpot(
+          _sparkline7D.price.indexOf(value).toDouble(),
+          value,
         ),
       )
       .toList();

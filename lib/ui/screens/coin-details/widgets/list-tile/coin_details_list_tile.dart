@@ -1,6 +1,6 @@
-import '../../../../../../constant/extension/extension.dart';
-
 import 'package:flutter/material.dart';
+
+import '../../../../../../constant/extension/extension.dart';
 
 class CoinDetailsListTile extends StatelessWidget {
   const CoinDetailsListTile({

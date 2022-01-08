@@ -24,6 +24,7 @@ class CoinDetailsWidget extends StatelessWidget {
         constraints: BoxConstraints(
           minHeight: size.height,
           maxWidth: size.width,
+          minWidth: size.width,
         ),
         child: Column(
           children: [

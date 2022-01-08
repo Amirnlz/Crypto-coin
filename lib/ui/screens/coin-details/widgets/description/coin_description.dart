@@ -1,5 +1,6 @@
-import '../../../../../constant/extension/extension.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../constant/extension/extension.dart';
 
 class CoinDescription extends StatefulWidget {
   const CoinDescription({required this.description, Key? key})
@@ -44,7 +45,7 @@ class _CoinDescriptionState extends State<CoinDescription> {
           GestureDetector(
             onTap: _changeMaxLine,
             child: Text(
-              maxLinesNumber == null ? 'Show less' : 'Show more',
+              maxLinesNumber == numberOfpharagraphes ? 'Show less' : 'Show more',
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w600,

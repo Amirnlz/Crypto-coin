@@ -1,9 +1,9 @@
-import '../../../../../bloc/coin/coins_bloc.dart';
-
-import '../../../../../../constant/constans.dart';
-import 'input_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../../constant/constans.dart';
+import '../../../../../bloc/coin/coins_bloc.dart';
+import 'input_widgets.dart';
 
 class AddingElements extends StatelessWidget {
   const AddingElements({Key? key}) : super(key: key);
