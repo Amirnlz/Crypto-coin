@@ -36,21 +36,19 @@ extension DoubleExtension on double {
             .replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
                 (match) => '${match[1]},')
             .coinWithoutSign
-        : _lessThanNumberOne.coinWithoutSign;
+        : _lessThanOne.coinWithoutSign;
   }
 
-  String get _lessThanNumberOne =>
-      this > 0 ? toStringAsFixed(4) : _lessThanZero;
+  String get _lessThanOne => toStringAsFixed(_firstDigitIndexMoreThanZero + 2);
 
-  String get _lessThanZero =>
-      this == 0 ? toStringAsFixed(2) : toStringAsFixed(5);
-
-  String get getCoinStatusSign {
-    if (toString().contains('-')) {
-      return '-';
-    } else {
-      return '+';
+  int get _firstDigitIndexMoreThanZero {
+    String number = toString().replaceAll('-', '').replaceAll('.', '');
+    for (int i = 0; i < number.length; i++) {
+      if (number[i] != '0') {
+        return i;
+      }
     }
+    return 0;
   }
 
   String get thousandsFormatter {
@@ -61,13 +59,19 @@ extension DoubleExtension on double {
     } else if (this > 999999 && this < 999999999) {
       return '${(this / 1000000).toStringAsFixed(1)} M';
     } else if (this > 999999999) {
-      return '${(this / 1000000000).toStringAsFixed(1)} B';
+      return this != double.infinity
+          ? '${(this / 1000000000).toStringAsFixed(1)} B'
+          : 'Infinity';
     } else {
       return toString();
     }
   }
 
-  double get removeDecimal {
-    return this >= 1 ? double.parse(toString().split('.').first) : this;
+  String get getCoinStatusSign {
+    if (toString().contains('-')) {
+      return '-';
+    } else {
+      return '+';
+    }
   }
 }
