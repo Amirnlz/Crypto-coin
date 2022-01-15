@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../bloc/swap-coin/swap_coin_bloc.dart';
 import '../screens/coins/coins_screen.dart';
 import '../screens/home/home_screen.dart';
+import '../screens/swap/swap_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -52,8 +54,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
             const HomeScreen(),
             const CoinScreen(),
             BlocProvider(
-              create: (context) => CoinBloc()..add(GetMarketCoin()),
-              child: const CoinScreen(),
+              create: (context) => SwapCoinBloc(),
+              child: const SwapScreen(),
             ),
           ],
         ),
