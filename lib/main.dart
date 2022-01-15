@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/coin-details/coin_details_bloc.dart';
 import 'bloc/coin-wallet/coin_wallet_bloc.dart';
+import 'bloc/coin/coins_bloc.dart';
 import 'constant/constans.dart';
 import 'ui/components/bottom_nav_bar.dart';
 
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => CoinDetailsBloc(),
         ),
+        BlocProvider(
+          create: (context) => CoinBloc(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

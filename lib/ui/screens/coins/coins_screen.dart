@@ -17,6 +17,7 @@ class CoinScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BlocConsumer<CoinBloc, CoinListState>(
+            bloc: BlocProvider.of<CoinBloc>(context)..add(GetMarketCoin()),
             listener: (context, state) {
               if (state is CoinListError) {
                 showSnackBar(context, state.message);
