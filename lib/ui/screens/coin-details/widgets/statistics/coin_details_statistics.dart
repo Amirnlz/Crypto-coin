@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import '../../../../widget/market_box.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../constant/extension/extension.dart';
 import '../../../../../../models/coin/coin_details.dart';
+import '../../../../widget/market_box.dart';
 import 'line-chart/coin_detail_chart.dart';
 
 class CoinDetailsStatistics extends StatelessWidget {

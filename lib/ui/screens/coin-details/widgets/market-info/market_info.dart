@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
 import '../../../../../constant/extension/extension.dart';
 import '../../../../../models/coin/coin_details.dart';
 import '../../../../widget/market_box.dart';
-import 'package:flutter/material.dart';
 
 class MarketInfo extends StatelessWidget {
   const MarketInfo({required this.marketData, Key? key}) : super(key: key);
