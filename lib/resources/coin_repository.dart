@@ -6,10 +6,10 @@ import 'network/coin_api_provider.dart';
 class CoinRepository {
   final CoinApiProvider _coinApiProvider = CoinApiProvider();
 
-  Future<List<Coin>> fetchMarketCoin() =>
+  Future<List<Coin>> get fetchMarketCoin =>
       _coinApiProvider.fetchMarketCoinList();
 
-  Future<List<SupportedCoin>> fetchSupportedCoin() =>
+  Future<List<SupportedCoin>> get fetchSupportedCoin =>
       CoinApiProvider().fetchSupportedCoinList();
 
   Future<CoinDetails> fetchCoinDetailsById(String id) =>

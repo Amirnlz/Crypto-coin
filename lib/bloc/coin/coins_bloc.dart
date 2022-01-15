@@ -15,7 +15,7 @@ class CoinBloc extends Bloc<CoinEvent, CoinListState> {
       if (event is GetMarketCoin) {
         emit(const CoinListLoading());
         try {
-          await _repoitory.fetchMarketCoin().then((coins) {
+          await _repoitory.fetchMarketCoin.then((coins) {
             emit(CoinListLoaded(coins));
           });
         } catch (e) {

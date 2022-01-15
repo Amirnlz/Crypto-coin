@@ -16,7 +16,7 @@ class SupportedCoinBloc
       if (event is GetSupportedCoin) {
         emit(const SupportedCoinLoading());
         try {
-          await _repoitory.fetchSupportedCoin().then((coins) {
+          await _repoitory.fetchSupportedCoin.then((coins) {
             emit(SupportedCoinLoaded(supportedCoin: coins));
           });
         } catch (e) {
