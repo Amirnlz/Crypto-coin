@@ -112,13 +112,7 @@ class _InputWidgetsState extends State<InputWidgets> {
               );
               Navigator.pop(context);
             },
-            style: ElevatedButton.styleFrom(
-              primary: blueColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              elevation: 10,
-            ),
+            style: kElevatedButtonStyle,
             child: const Text(
               'Add to wallet',
             ),

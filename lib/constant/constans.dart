@@ -26,3 +26,11 @@ final kTextFieldOutlineBorder = OutlineInputBorder(
   borderSide: BorderSide(color: Colors.grey.shade400, width: 1.0),
   borderRadius: BorderRadius.circular(10.0),
 );
+
+final kElevatedButtonStyle = ElevatedButton.styleFrom(
+  primary: blueColor,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10),
+  ),
+  elevation: 5,
+);
