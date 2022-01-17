@@ -6,30 +6,25 @@ import '../../../../constant/extension/extension.dart';
 import '../../../../models/coin/coin.dart';
 import '../../../widget/common_widgets.dart';
 
-class Sourcecoin extends StatefulWidget {
-  const Sourcecoin(
+class TargetCoin extends StatefulWidget {
+  const TargetCoin(
       {required this.coinList,
       required this.coin,
+      required this.coinAmount,
       required this.priceValue,
-      required this.amount,
       Key? key})
       : super(key: key);
   final List<Coin> coinList;
   final Coin? coin;
+  final double coinAmount;
   final double priceValue;
-  final double amount;
 
   @override
-  State<Sourcecoin> createState() => _SourcecoinState();
+  State<TargetCoin> createState() => _TargetCoinState();
 }
 
-class _SourcecoinState extends State<Sourcecoin> {
-  late final TextEditingController _controller =
-      TextEditingController(text: widget.amount.toString());
-
-  late String _value = widget.coin?.id ?? 'bitcoin';
-
-  late double _amount = widget.amount;
+class _TargetCoinState extends State<TargetCoin> {
+  late String _value = widget.coin?.id ?? 'ethereum';
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +47,7 @@ class _SourcecoinState extends State<Sourcecoin> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'I have ${_amount.toString()} ${_value.capitalize}',
+          'I want ${_value.capitalize}',
           style: const TextStyle(
             fontSize: 16,
             color: Colors.grey,
@@ -81,10 +76,7 @@ class _SourcecoinState extends State<Sourcecoin> {
             dropDownButton(),
           ],
         ),
-        SizedBox(
-          width: width * 0.3,
-          child: amountTextField(),
-        ),
+        coinAmountText(),
       ],
     );
   }
@@ -109,24 +101,18 @@ class _SourcecoinState extends State<Sourcecoin> {
     );
   }
 
-  TextField amountTextField() {
-    return TextField(
-      controller: _controller,
-      onChanged: onChangedAmount,
-      keyboardType: TextInputType.number,
-      textAlign: TextAlign.end,
-      decoration: const InputDecoration(
-        hintText: '0.00',
-        hintStyle: TextStyle(
-          fontSize: 17,
-          color: Colors.grey,
-        ),
-        border: InputBorder.none,
+  Widget coinAmountText() {
+    return Text(
+      widget.coinAmount.toStringAsFixed(2),
+      style: const TextStyle(
+        fontSize: 17,
+        color: Colors.grey,
       ),
     );
   }
 
   void onChangedCoin(String? value) {
+    debugPrint('onChanged: $value');
 
     setState(() {
       _value = value!;
@@ -134,27 +120,14 @@ class _SourcecoinState extends State<Sourcecoin> {
     updateBloc();
   }
 
-  void onChangedAmount(String? value) {
-    setState(() {
-      _amount = double.parse(value!);
-    });
-    updateCoinInfo();
-  }
-
   void updateBloc() {
     final bloc = BlocProvider.of<SwapCoinBloc>(context);
     bloc.add(
       DoSwapEvent(
-        sourceCoinId: _value,
-        targetCoinId: bloc.state.targetCoin?.id ?? widget.coinList[1].id,
-        sourceCoinAmount: _amount,
+        targetCoinId: _value,
+        sourceCoinId: bloc.state.sourceCoin?.id ?? widget.coinList.first.id,
+        sourceCoinAmount: bloc.state.sourceAmount,
       ),
-    );
-  }
-
-  void updateCoinInfo() {
-    BlocProvider.of<SwapCoinBloc>(context).add(
-      ChangeSourceCoin(coinId: _value, sourceCoinAmount: _amount),
     );
   }
 }

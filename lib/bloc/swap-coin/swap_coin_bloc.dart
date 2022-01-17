@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../models/coin/coin.dart';
 import '../../resources/coin_repository.dart';
@@ -13,7 +13,7 @@ class SwapCoinBloc extends Bloc<SwapCoinEvent, SwapCoinState> {
   SwapCoinBloc() : super(const InitialSwapCoinState()) {
     on<InitializeSwapCoinEvent>(_initialize);
     on<ChangeSourceCoin>(_changeSourceCoin);
-    on<ChangeTargetCoin>(_changeTargetCoin);
+    on<DoSwapEvent>(_updateState);
   }
 
   void _initialize(event, emit) {
@@ -21,26 +21,33 @@ class SwapCoinBloc extends Bloc<SwapCoinEvent, SwapCoinState> {
   }
 
   void _changeSourceCoin(event, emit) async {
-    final coin = await findCoin(event.coinId);
+    Coin coin = await findCoin(event.coinId);
     final price = event.sourceCoinAmount * coin.currentPrice;
 
     emit(
       UpdateSourceCoinState(
           sourceCoin: coin,
-          sourcePrice: price,
+          coinsValue: price,
           sourceAmount: event.sourceCoinAmount),
     );
   }
 
-  void _changeTargetCoin(event, emit) async {
-    final coin = await findCoin(event.coinId);
-    final price = state.sourcePrice;
-    final amount = price / coin.currentPrice;
+  void _updateState(event, emit) async {
+    emit(const LoadingSwapCoinState());
 
-    emit(
-      UpdateTargetCoinState(
-          targetCoin: coin, targetPrice: price, targetAmount: amount),
-    );
+    Coin targetCoin = await findCoin(event.targetCoinId);
+    Coin sourceCoin = await findCoin(event.sourceCoinId);
+    final targetAmount = (event.sourceCoinAmount * sourceCoin.currentPrice) /
+        targetCoin.currentPrice;
+    final coinsValue = event.sourceCoinAmount * sourceCoin.currentPrice;
+
+    emit(UpdateSwapState(
+      targetCoin: targetCoin,
+      sourceCoin: sourceCoin,
+      targetAmount: targetAmount,
+      sourceAmount: event.sourceCoinAmount,
+      coinsValue: coinsValue,
+    ));
   }
 
   Future<Coin> findCoin(String coinId) async {

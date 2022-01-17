@@ -6,17 +6,14 @@ abstract class SwapCoinState {
   final Coin? targetCoin;
   final double sourceAmount;
   final double targetAmount;
-  final double sourcePrice;
-
-  final double targetPrice;
+  final double coinsValue;
 
   const SwapCoinState({
     this.sourceCoin,
     this.targetCoin,
     this.sourceAmount = 0,
     this.targetAmount = 0,
-    this.sourcePrice = 0,
-    this.targetPrice = 0,
+    this.coinsValue = 0,
   });
 }
 
@@ -32,22 +29,27 @@ class UpdateSourceCoinState extends SwapCoinState {
   const UpdateSourceCoinState(
       {required Coin sourceCoin,
       required double sourceAmount,
-      required double sourcePrice})
+      required double coinsValue})
       : super(
             sourceCoin: sourceCoin,
             sourceAmount: sourceAmount,
-            sourcePrice: sourcePrice);
+            coinsValue: coinsValue);
 }
 
-class UpdateTargetCoinState extends SwapCoinState {
-  const UpdateTargetCoinState(
+class UpdateSwapState extends SwapCoinState {
+  const UpdateSwapState(
       {required Coin targetCoin,
+      required Coin sourceCoin,
       required double targetAmount,
-      required double targetPrice})
+      required double sourceAmount,
+      required double coinsValue})
       : super(
-            targetCoin: targetCoin,
-            targetAmount: targetAmount,
-            targetPrice: targetPrice);
+          targetCoin: targetCoin,
+          sourceCoin: sourceCoin,
+          targetAmount: targetAmount,
+          sourceAmount: sourceAmount,
+          coinsValue: coinsValue,
+        );
 }
 
 class ErrorSwapCoinState extends SwapCoinState {

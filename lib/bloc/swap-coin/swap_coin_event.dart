@@ -16,8 +16,14 @@ class ChangeSourceCoin extends SwapCoinEvent {
   ChangeSourceCoin({required this.coinId, required this.sourceCoinAmount});
 }
 
-class ChangeTargetCoin extends SwapCoinEvent {
-  final String coinId;
+class DoSwapEvent extends SwapCoinEvent {
+  final String sourceCoinId;
+  final String targetCoinId;
+  final double sourceCoinAmount;
 
-  ChangeTargetCoin({required this.coinId});
+  DoSwapEvent({
+    required this.sourceCoinId,
+    required this.targetCoinId,
+    required this.sourceCoinAmount,
+  });
 }
