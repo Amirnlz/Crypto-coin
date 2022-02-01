@@ -11,20 +11,18 @@ class CoinDetailsBloc extends Bloc<CoinDetailsEvent, CoinDetailsState> {
   final _repository = CoinRepository();
 
   CoinDetailsBloc() : super(const CoinDetailsInitial()) {
-    on<CoinDetailsEvent>(
-      (event, emit) async {
-        if (event is GetCoinDetailsById) {
-          emit(const CoinDetailsLoading());
-          await _repository.fetchCoinDetailsById(event.id).then(
-            (value) {
-              emit(CoinDetailsLoaded(value));
-            },
-          ).catchError(
-            (error) {
-              emit(const CoinDetailsError('Error fetching coin details'));
-            },
-          );
-        }
+    on<GetCoinDetailsById>(_getCoinDetailsById);
+  }
+
+  void _getCoinDetailsById(event, emit) async {
+    emit(const CoinDetailsLoading());
+    await _repository.fetchCoinDetailsById(event.id).then(
+      (value) {
+        emit(CoinDetailsLoaded(value));
+      },
+    ).catchError(
+      (error) {
+        emit(const CoinDetailsError('Error fetching coin details'));
       },
     );
   }

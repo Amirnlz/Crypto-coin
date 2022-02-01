@@ -3,11 +3,11 @@ part of 'coin_wallet_bloc.dart';
 @immutable
 abstract class CoinWalletState {
   final List<CoinWallet> coinsWallet;
-  final double totalAmount;
-  final double totalProfitPercentage;
+  final double amount;
+  final double profitPercentage;
 
   const CoinWalletState(
-      this.coinsWallet, this.totalAmount, this.totalProfitPercentage);
+      this.coinsWallet, this.amount, this.profitPercentage);
 }
 
 class CoinWalletInitial extends CoinWalletState {

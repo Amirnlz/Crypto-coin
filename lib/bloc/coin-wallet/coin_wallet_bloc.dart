@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -12,44 +11,61 @@ class CoinWalletBloc extends Bloc<CoinWalletEvent, CoinWalletState> {
   final _repository = CoinRepository();
 
   CoinWalletBloc() : super(const CoinWalletInitial()) {
-    on<CoinWalletEvent>(
-      (event, emit) async {
-        if (event is GetCoinWallet) {
-          if (event.coinWalletList.isNotEmpty) {
-
-            final totalAmount = sumAssetsAmount(event.coinWalletList);
-            final totalProfitPercent = sumProfitPercent(event.coinWalletList);
-
-            emit(CoinWalletListLoaded(
-              coinsWallet: event.coinWalletList,
-              amount: totalAmount,
-              profitPercentage: totalProfitPercent,
-            ));
-          } else {
-
-            emit(CoinWalletListLoaded(coinsWallet: state.coinsWallet));
-          }
-        } else if (event is AddCoinToWallet) {
-          emit(const CoinWalletLoading());
-          try {
-            final newList = await getNewCoinWalletList(
-                event.coinWalletList, event.coinId, event.amount);
-            final totalAmount = sumAssetsAmount(newList);
-            final totalProfitPercent = sumProfitPercent(newList);
-
-            emit(CoinWalletListLoaded(
-                coinsWallet: newList,
-                amount: totalAmount,
-                profitPercentage: totalProfitPercent));
-          } catch (e) {
-            emit(const CoinWalletError(error: 'Error adding coin to wallet'));
-          }
-        }
-      },
-    );
+    on<GetCoinWallet>(_getCoinWallet);
+    on<AddCoinToWallet>(_addCoinToWallet);
+    on<RemoveCoinFromWallet>(_removeCoinFromWallet);
   }
 
-  double sumAssetsAmount(List<CoinWallet> list) {
+  void _getCoinWallet(event, emit) {
+    if (event.coinWalletList.isNotEmpty) {
+      final totalAmount = updateAssetsAmount(event.coinWalletList);
+      final totalProfitPercent = updateProfitPercent(event.coinWalletList);
+
+      emit(CoinWalletListLoaded(
+        coinsWallet: event.coinWalletList,
+        amount: totalAmount,
+        profitPercentage: totalProfitPercent,
+      ));
+    } else {
+      emit(CoinWalletListLoaded(coinsWallet: state.coinsWallet));
+    }
+  }
+
+  void _addCoinToWallet(event, emit) async {
+    emit(const CoinWalletLoading());
+    try {
+      final newList = await getNewCoinWalletList(
+          event.coinWalletList, event.coinId, event.amount);
+      final totalAmount = updateAssetsAmount(newList);
+      final totalProfitPercent = updateProfitPercent(newList);
+
+      emit(CoinWalletListLoaded(
+          coinsWallet: newList,
+          amount: totalAmount,
+          profitPercentage: totalProfitPercent));
+    } catch (e) {
+      emit(const CoinWalletError(error: 'Error adding coin to wallet'));
+    }
+  }
+
+  void _removeCoinFromWallet(event, emit) async {
+    emit(const CoinWalletLoading());
+    try {
+      final newList = await getNewCoinWalletList(
+          event.coinWalletList, event.coinId, -event.amount);
+      final totalAmount = updateAssetsAmount(newList);
+      final totalProfitPercent = updateProfitPercent(newList);
+
+      emit(CoinWalletListLoaded(
+          coinsWallet: newList,
+          amount: totalAmount,
+          profitPercentage: totalProfitPercent));
+    } catch (e) {
+      emit(const CoinWalletError(error: 'Error removing coin from wallet'));
+    }
+  }
+
+  double updateAssetsAmount(List<CoinWallet> list) {
     double totalAmount = 0;
     for (var coin in list) {
       totalAmount += coin.currentPrice;
@@ -57,7 +73,7 @@ class CoinWalletBloc extends Bloc<CoinWalletEvent, CoinWalletState> {
     return totalAmount;
   }
 
-  double sumProfitPercent(List<CoinWallet> list) {
+  double updateProfitPercent(List<CoinWallet> list) {
     double totalProfitPercent = 0;
     for (var coin in list) {
       totalProfitPercent += coin.priceChangePercentage24H;
