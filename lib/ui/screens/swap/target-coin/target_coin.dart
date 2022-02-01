@@ -112,8 +112,6 @@ class _TargetCoinState extends State<TargetCoin> {
   }
 
   void onChangedCoin(String? value) {
-    debugPrint('onChanged: $value');
-
     setState(() {
       _value = value!;
     });

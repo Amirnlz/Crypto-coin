@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -31,12 +32,15 @@ class _SwapWidgetsState extends State<SwapWidgets> {
     );
   }
 
-  SvgPicture topBackgroundImage(double height, double width) {
-    return SvgPicture.asset(
-      'assets/images/Bitcoin P2P-pana.svg',
-      semanticsLabel: 'Swap coins',
-      width: width,
-      height: height,
+  Widget topBackgroundImage(double height, double width) {
+    return FadeInUp(
+      duration: const Duration(seconds: 1),
+      child: SvgPicture.asset(
+        'assets/images/Bitcoin P2P-pana.svg',
+        semanticsLabel: 'Swap coins',
+        width: width,
+        height: height,
+      ),
     );
   }
 
@@ -61,17 +65,23 @@ class _SwapWidgetsState extends State<SwapWidgets> {
   Column buildWIdgets(SwapCoinState state) {
     return Column(
       children: [
-        Sourcecoin(
-          coinList: widget.coins,
-          coin: state.sourceCoin,
-          priceValue: state.coinsValue,
-          amount: state.sourceAmount,
+        FadeInLeft(
+          delay: const Duration(milliseconds: 800),
+          child: Sourcecoin(
+            coinList: widget.coins,
+            coin: state.sourceCoin,
+            priceValue: state.coinsValue,
+            amount: state.sourceAmount,
+          ),
         ),
-        TargetCoin(
-          coinList: widget.coins,
-          coin: state.targetCoin,
-          coinAmount: state.targetAmount,
-          priceValue: state.coinsValue,
+        FadeInRight(
+          delay: const Duration(milliseconds: 800),
+          child: TargetCoin(
+            coinList: widget.coins,
+            coin: state.targetCoin,
+            coinAmount: state.targetAmount,
+            priceValue: state.coinsValue,
+          ),
         ),
       ],
     );
