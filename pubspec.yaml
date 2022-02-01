@@ -59,7 +59,6 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/cairo/
-    - assets/fonts/poppins/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -80,14 +79,3 @@ flutter:
         - asset: assets/fonts/cairo/Cairo-Regular.ttf
           weight: 400
         - asset: assets/fonts/cairo/Cairo-VariableFont_wght.ttf
-
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/poppins/Poppins-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/poppins/Poppins-Light.ttf
-          weight: 300
-        - asset: assets/fonts/poppins/Poppins-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/poppins/Poppins-Regular.ttf
-          weight: 400

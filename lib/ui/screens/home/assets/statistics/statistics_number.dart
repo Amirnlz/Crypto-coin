@@ -27,7 +27,7 @@ class StatisticsNumber extends StatelessWidget {
           builder: (context, state) {
             if (state is CoinWalletListLoaded) {
               return buildStatics(
-                  state.totalAmount, state.totalProfitPercentage, size);
+                  state.amount, state.profitPercentage, size);
             }
             return buildStarterStatic(size);
           },
