@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import '../../constant/extension/extension.dart';
 import '../../models/coin/coin.dart';
-import 'package:flutter/material.dart';
 
 class CommonWidgets {
   final String? imageUrl;
