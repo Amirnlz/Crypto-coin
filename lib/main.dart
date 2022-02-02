@@ -1,3 +1,4 @@
+import 'package:crypto_coin/ui/intro/intro_screen.dart';
 import 'package:device_preview/device_preview.dart';
 // ignore: unnecessary_import
 import 'package:flutter/foundation.dart';
@@ -8,13 +9,12 @@ import 'bloc/coin-details/coin_details_bloc.dart';
 import 'bloc/coin-wallet/coin_wallet_bloc.dart';
 import 'bloc/coin/coins_bloc.dart';
 import 'constant/constans.dart';
-import 'ui/components/bottom_nav_bar.dart';
 
 void main() {
   runApp(
     DevicePreview(
       enabled: false,
-      builder: (context) => const MyApp(), // Wrap your app
+      builder: (context) => const MyApp(),
     ),
   );
 }
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
           ),
           fontFamily: 'Cairo',
         ),
-        home: const BottomNavBar(),
+        home: const IntroScreen(),
       ),
     );
   }
