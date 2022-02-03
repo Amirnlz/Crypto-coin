@@ -1,4 +1,4 @@
-import 'package:crypto_coin/ui/intro/intro_screen.dart';
+import 'ui/splash/splash_screen.dart';
 import 'package:device_preview/device_preview.dart';
 // ignore: unnecessary_import
 import 'package:flutter/foundation.dart';
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
           ),
           fontFamily: 'Cairo',
         ),
-        home: const IntroScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

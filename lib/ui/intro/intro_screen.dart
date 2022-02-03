@@ -1,8 +1,9 @@
-import 'package:crypto_coin/constant/constans.dart';
-import 'package:crypto_coin/ui/components/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
+
+import '../../constant/constans.dart';
+import '../components/bottom_nav_bar.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({Key? key}) : super(key: key);
@@ -19,6 +20,10 @@ class _IntroScreenState extends State<IntroScreen> {
   @override
   void initState() {
     super.initState();
+    createSlides();
+  }
+
+  void createSlides() {
     slides.add(
       Slide(
         title: 'Welcome to the app',
