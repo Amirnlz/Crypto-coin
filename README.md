@@ -1,16 +1,48 @@
 # crypto_coin
 
-A new Flutter project.
+This Flutter project focuses on cryptocurrency, with features like:
 
-## Getting Started
+- track added ctypto coin chnages 
+- coin details
+- coin changes chart
+- crypto market list
+- swap coins 
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+<details>
+  <summary><b>:camera: &nbsp;Screenshots</b></summary>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<table>
+<tr>
+  
+<td>
+<img src="screenshots/splash.png" width="400px" height="650px" alt="image0">
+</td>
+  
+<td>
+<img src="screenshots/home.png" width="400px" height="650px" alt="image1">
+</td>
+  
+<td>
+<img src="screenshots/coin-list.png" width="400px" height="650px" alt="image2">
+</td>
+  
+</tr>
+<tr>
+  
+<td>
+<img src="screenshots/bitcoin-info.png" width="400px" height="650px" alt="image3">
+</td>
+  
+<td>
+<img src="screenshots/bitcoin-info-2.png" width="400px" height="650px" alt="image4">
+</td>
+  
+<td>
+<img src="screenshots/swap.png" width="400px" height="650px" alt="image5">
+</td>
+  
+</tr>
+</table>
+</details>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
