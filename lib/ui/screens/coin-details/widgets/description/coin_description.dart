@@ -22,6 +22,12 @@ class _CoinDescriptionState extends State<CoinDescription> {
     });
   }
 
+  String descriptionText() {
+    return widget.description.isEmpty
+        ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consectetur libero id faucibus nisl tincidunt eget nullam. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Faucibus nisl tincidunt eget nullam non nisi est sit. Tristique magna sit amet purus gravida quis. Blandit massa enim nec dui nunc mattis enim ut tellus. Integer enim neque volutpat ac. Enim praesent elementum facilisis leo vel fringilla est ullamcorper eget. Sapien pellentesque habitant morbi tristique senectus et netus et. Laoreet sit amet cursus sit amet. Sed id semper risus in hendrerit. Et netus et malesuada fames ac turpis egestas sed. Lobortis mattis aliquam faucibus purus in. Viverra tellus in hac habitasse. Interdum velit euismod in pellentesque massa placerat duis ultricies. Sit amet cursus sit amet dictum sit amet justo donec.'
+        : widget.description.removeHTMLTags;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +43,7 @@ class _CoinDescriptionState extends State<CoinDescription> {
             ),
           ),
           Text(
-            widget.description.removeHTMLTags,
+            descriptionText(),
             maxLines: maxLinesNumber,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodyText2,
@@ -45,7 +51,9 @@ class _CoinDescriptionState extends State<CoinDescription> {
           GestureDetector(
             onTap: _changeMaxLine,
             child: Text(
-              maxLinesNumber == numberOfpharagraphes ? 'Show less' : 'Show more',
+              maxLinesNumber == numberOfpharagraphes
+                  ? 'Show less'
+                  : 'Show more',
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w600,

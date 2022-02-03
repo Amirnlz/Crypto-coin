@@ -32,7 +32,6 @@ class _SplashScreenState extends State<SplashScreen> {
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _introSeen = (prefs.getBool('intro_seen') ?? false);
-    debugPrint('introSeen: $_introSeen');
 
     Navigator.pop(context);
     if (_introSeen) {
