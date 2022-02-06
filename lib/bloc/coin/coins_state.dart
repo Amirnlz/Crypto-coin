@@ -1,30 +1,31 @@
 part of 'coins_bloc.dart';
 
 @immutable
-abstract class CoinListState {
+abstract class CoinListState extends Equatable {
   final List<Coin> coinList;
   const CoinListState(this.coinList);
 }
 
 class CoinListInitial extends CoinListState {
   const CoinListInitial() : super(const []);
+
+  @override
+  List<Object?> get props => [coinList];
 }
 
 class CoinListLoading extends CoinListState {
   const CoinListLoading() : super(const []);
+
+  @override
+  List<Object?> get props => [coinList];
 }
 
 class CoinListLoaded extends CoinListState {
-  const CoinListLoaded(List<Coin> coins) : super(coins);
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is CoinListLoaded && listEquals(other.coinList, coinList);
-  }
+  final List<Coin> coins = const [];
+  const CoinListLoaded(coins) : super(coins);
 
   @override
-  int get hashCode => coinList.hashCode;
+  List<Object?> get props => [coins];
 }
 
 class CoinListError extends CoinListState {
@@ -33,12 +34,5 @@ class CoinListError extends CoinListState {
   String get message => error;
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is CoinListError && other.error == error;
-  }
-
-  @override
-  int get hashCode => error.hashCode;
+  List<Object?> get props => [coinList];
 }

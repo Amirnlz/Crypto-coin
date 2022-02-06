@@ -1,7 +1,7 @@
 part of 'swap_coin_bloc.dart';
 
 @immutable
-abstract class SwapCoinState {
+abstract class SwapCoinState extends Equatable {
   final Coin? sourceCoin;
   final Coin? targetCoin;
   final double sourceAmount;
@@ -19,10 +19,18 @@ abstract class SwapCoinState {
 
 class InitialSwapCoinState extends SwapCoinState {
   const InitialSwapCoinState() : super();
+
+  @override
+  List<Object?> get props =>
+      [sourceCoin, targetCoin, sourceAmount, targetAmount, coinsValue];
 }
 
 class LoadingSwapCoinState extends SwapCoinState {
   const LoadingSwapCoinState() : super();
+
+  @override
+  List<Object?> get props =>
+      [sourceCoin, targetCoin, sourceAmount, targetAmount, coinsValue];
 }
 
 class UpdateSourceCoinState extends SwapCoinState {
@@ -34,6 +42,10 @@ class UpdateSourceCoinState extends SwapCoinState {
             sourceCoin: sourceCoin,
             sourceAmount: sourceAmount,
             coinsValue: coinsValue);
+
+  @override
+  List<Object?> get props =>
+      [sourceCoin, targetCoin, sourceAmount, targetAmount, coinsValue];
 }
 
 class UpdateSwapState extends SwapCoinState {
@@ -50,6 +62,10 @@ class UpdateSwapState extends SwapCoinState {
           sourceAmount: sourceAmount,
           coinsValue: coinsValue,
         );
+
+  @override
+  List<Object?> get props =>
+      [sourceCoin, targetCoin, sourceAmount, targetAmount, coinsValue];
 }
 
 class ErrorSwapCoinState extends SwapCoinState {
@@ -58,4 +74,8 @@ class ErrorSwapCoinState extends SwapCoinState {
   const ErrorSwapCoinState({
     required this.error,
   }) : super();
+
+  @override
+  List<Object?> get props =>
+      [sourceCoin, targetCoin, sourceAmount, targetAmount, coinsValue];
 }

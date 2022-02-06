@@ -1,7 +1,4 @@
-import 'ui/splash/splash_screen.dart';
 import 'package:device_preview/device_preview.dart';
-// ignore: unnecessary_import
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,6 +6,7 @@ import 'bloc/coin-details/coin_details_bloc.dart';
 import 'bloc/coin-wallet/coin_wallet_bloc.dart';
 import 'bloc/coin/coins_bloc.dart';
 import 'constant/constans.dart';
+import 'ui/splash/splash_screen.dart';
 
 void main() {
   runApp(

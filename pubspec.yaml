@@ -32,6 +32,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   device_preview: ^1.0.0
   dio: ^4.0.4
+  equatable: ^2.0.3
   fl_chart: ^0.40.6
   flutter:
     sdk: flutter
@@ -79,5 +80,3 @@ flutter:
         - asset: assets/fonts/cairo/Cairo-Medium.ttf
           weight: 500
         - asset: assets/fonts/cairo/Cairo-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/cairo/Cairo-VariableFont_wght.ttf
